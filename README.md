@@ -1,2 +1,5 @@
-##Projects by Maria Zieglmeier
-Interesting projects that I developed during my university career. More information on each project can be found in each folder.
+## uni-projects
+Cool projects that I created during my university career. More information can be found in a README in each folder. 
+
+## author
+Maria Zieglmeier
