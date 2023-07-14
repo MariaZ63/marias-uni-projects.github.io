@@ -87,18 +87,18 @@ $(document).ready(function () {
 	/** Title melody and sounds */
 
 	
-	var titleMelody = document.createElement('audio');
+	/* var titleMelody = document.createElement('audio');
 	titleMelody.setAttribute('src', 'sounds/titlemelody.mp3');
 	titleMelody.autoplay = false;
-	titleMelody.play();
+	titleMelody.play(); */
 	var takeOff = document.createElement('audio');
 	takeOff.setAttribute('src', 'sounds//takeOff.mp3');
 
 	$('#start_button').off('click').on('click', function () {
 
-		if (!titleMelody.paused) { //title melody stops, when the #start_button is clicked
+		/* if (!titleMelody.paused) { //title melody stops, when the #start_button is clicked
 			titleMelody.pause();
-		}
+		} */
 		takeOff.play();//takeOff-sounds are played when the #start_button is clicked
 		$('#start_button').hide();
 		$('#introductionSam').hide();

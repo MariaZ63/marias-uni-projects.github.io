@@ -40,3 +40,9 @@ Additional information can be hidden by clicking the x-Button or clicking on the
 ## References
 Visit the reference page of the comic to see on to which sources the story's data is based on. 
 
+## Contributors
+Josephine Euler (Intro & Outro)
+Mareike Link (Health)
+Maria Zieglmeier (Crashtest)
+
+
