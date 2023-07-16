@@ -1,3 +1,6 @@
+container {
+    margin-top: 20px;
+}
 .card-img-top {
     height: 200px;
     /* Set a fixed height for the card image */
