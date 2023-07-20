@@ -1,4 +1,18 @@
-container {
+.custom-header {
+  background-color: #8c3839; 
+  border-radius: 15px; 
+  color:#cedeeb
+}
+.custom-image {
+  float:left; 
+  padding:20px;
+}
+
+.header-text {
+  padding-top:10px;
+}
+
+.container {
     margin-top: 20px;
 }
 .card-img-top {
