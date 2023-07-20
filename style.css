@@ -1,19 +1,20 @@
-.custom-header {
+#custom-header {
   background-color: #8c3839; 
   border-radius: 15px; 
-  color:#cedeeb
+  color:#cedeeb;
+  margin-bottom: 5px;
 }
-.custom-image {
+#custom-image {
   float:left; 
   padding:20px;
 }
 
-.header-text {
+#header-text {
   padding-top:10px;
 }
 
 .container {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 .card-img-top {
     height: 200px;
