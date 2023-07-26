@@ -23,6 +23,6 @@
     /* Maintain the aspect ratio and cover the image */
 
   }
-  .col-sm-4, svg {
+  .col-sm-4, svg, .project{
     padding-bottom: 10px;
   }
