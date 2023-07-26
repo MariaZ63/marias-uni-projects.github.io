@@ -23,6 +23,11 @@
     /* Maintain the aspect ratio and cover the image */
 
   }
-  .col-sm-4, svg, .project{
+  .card-div, svg {
     padding-bottom: 10px;
+  }
+
+  .project, .project-img{
+    padding-bottom: 10px; 
+    padding-top: 5px;
   }
