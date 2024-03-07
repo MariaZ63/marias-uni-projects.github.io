@@ -1,0 +1,33 @@
+#custom-header {
+  background-color: #8c3839; 
+  border-radius: 15px; 
+  color:#cedeeb;
+  margin-bottom: 5px;
+}
+#custom-image {
+  float:left; 
+  padding:20px;
+}
+
+#header-text {
+  padding-top:10px;
+}
+
+.container {
+  margin-top: 20px;
+}
+.card-img-top {
+    height: 200px;
+    /* Set a fixed height for the card image */
+    object-fit: cover;
+    /* Maintain the aspect ratio and cover the image */
+
+  }
+  .card-div, svg {
+    padding-bottom: 10px;
+  }
+
+  .project, .project-img{
+    padding-bottom: 10px; 
+    padding-top: 5px;
+  }
