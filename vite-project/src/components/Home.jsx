@@ -7,7 +7,7 @@ const Home = () => {
       <div className="row">
         <div className="col-12 text-left">
           <p>
-            I am a student at university of Bamberg, doing master&apos;s program
+            I am a student at university of Bamberg, doing a master&apos;s program
             in{" "}
             <a href="https://www.uni-bamberg.de/ma-cith/">
               Computing in the Humanities
@@ -21,7 +21,6 @@ const Home = () => {
         </div>
         <div className="row">
           {descriptions.map((elem, i) =>  {
-            console.log(elem);
             return <Card key={i} content={elem}/>;
           })}
         </div>
