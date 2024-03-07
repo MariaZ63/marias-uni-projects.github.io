@@ -15,7 +15,7 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<Home/>} />
-              <Route path="marias-uni-projects.github.io" element={<Navigate to="addBooks" replace={true} />} />
+              <Route path="marias-uni-projects.github.io" element={<Navigate to="/" replace={true} />} />
               <Route path="projects" element={<Projects/>} />
               <Route path="about" element={<About/>} />
             </Route>
