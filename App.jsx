@@ -18,7 +18,7 @@ function App() {
               <Route path="marias-uni-projects.github.io" element={<Navigate to="/" replace={true} />} />
               <Route path="projects" element={<Projects/>} />
               <Route path="about" element={<About/>} />
-            </Route>
+            </Route> 
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
