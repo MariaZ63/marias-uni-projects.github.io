@@ -6,7 +6,7 @@ const Card = (param) => {
     <div className="col-md-4 col-sm-12 card-div">
       <div className="card h-100">
         <img
-          src={`../../assets/${param.content["name"]}.png`}
+          src={`../images/${param.content["name"]}.png`}
           className="card-img-top"
           alt={`${param.content["image"]} image`}
         />
