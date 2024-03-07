@@ -1,14 +1,15 @@
 import { NavLink } from "react-router-dom";
+import Zieglmeier from "../assets/Zieglmeier.png"
 
 const Header = () => {
   return (
     <header className="d-flex flex-wrap justify-content-end py-3 mb-4 border-bottom">
       <div id="custom-header" className="col-12 m-3 text-left custom-header">
         <img
-          id="custom-image"
+          id="custom-image" 
           className="responsive-img custom-image"
           height="200px"
-          src="../images/Zieglmeier.JPG"
+          src={Zieglmeier}
           alt="Headshot of Maria"
         />
         <h1 id="header-text">MARIA ZIEGLMEIER</h1>
