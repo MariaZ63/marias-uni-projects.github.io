@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
@@ -15,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<Home/>} />
+              <Route path="marias-uni-projects.github.io" element={<Navigate to="addBooks" replace={true} />} />
               <Route path="projects" element={<Projects/>} />
               <Route path="about" element={<About/>} />
             </Route>
