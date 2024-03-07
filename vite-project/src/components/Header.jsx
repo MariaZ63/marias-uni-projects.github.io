@@ -1,7 +1,9 @@
+import { NavLink } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="d-flex flex-wrap justify-content-end py-3 mb-4 border-bottom">
-      <div id="custom-header" className="col-12 text-left custom-header">
+      <div id="custom-header" className="col-12 m-3 text-left custom-header">
         <img
           id="custom-image"
           className="responsive-img custom-image"
@@ -19,23 +21,19 @@ const Header = () => {
       <nav>
         <ul className="nav nav-pills">
           <li className="nav-item">
-            <a
-              href="index.html"
-              className="nav-link active"
-              aria-current="page"
-            >
+            <NavLink className="nav-link" to={"/"}>
               Home
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a href="projects.html" className="nav-link">
+            <NavLink className="nav-link" to={"/projects"}>
               Projects
-            </a>
+            </NavLink>
           </li>
           <li className="nav-item">
-            <a href="about.html" className="nav-link">
+            <NavLink className="nav-link" to={"/about"}>
               About
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>
