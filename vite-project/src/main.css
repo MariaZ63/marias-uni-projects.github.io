@@ -18,9 +18,7 @@
   }
   .card-img-top {
       height: 200px;
-      /* Set a fixed height for the card image */
       object-fit: cover;
-      /* Maintain the aspect ratio and cover the image */
   
     }
     .card-div, svg {

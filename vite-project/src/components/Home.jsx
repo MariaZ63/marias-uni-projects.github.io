@@ -1,3 +1,6 @@
+import { descriptions } from "../descriptions";
+import Card from "./Card";
+
 const Home = () => {
   return (
     <>
@@ -15,6 +18,12 @@ const Home = () => {
             I particularly enjoy web development and data visualization. Below,
             you can see a selection of works I did during the last semesters.{" "}
           </p>
+        </div>
+        <div className="row">
+          {descriptions.map((elem, i) =>  {
+            console.log(elem);
+            return <Card key={i} content={elem}/>;
+          })}
         </div>
         <div className="row">
           <div className="col-12 text-left">

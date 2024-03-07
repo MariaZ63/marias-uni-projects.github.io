@@ -1,0 +1,799 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      Crappy Crash Tests - The Consequences of the Male Body as the Standard
+    </title>
+    <link rel="stylesheet" href="bootstrap-5.3.0-dist/css/bootstrap.css" />
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="script_crashtest.js"></script>
+
+    <style>
+      body {
+        overflow-x: hidden;
+      }
+
+      div {
+        text-align: center;
+      }
+
+      p {
+        text-align: center;
+        text-align-last: none;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-left: 50px;
+        display: block;
+      }
+
+      /*Marias additions to the stylesheet*/
+
+      /*adjustment for smaller screens (simplified responsiveness)*/
+      /*  @media only screen and (max-width : 1500px) {
+            .col-sm-2 {
+                width: 8%;
+            }
+
+            .col-sm-8 {
+                width: 84%;
+            }
+        } */
+
+      .pointer {
+        /*cursor transformation*/
+        cursor: pointer;
+      }
+
+      .popup {
+        /*layout for the popup windows*/
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 2px;
+        text-align: left;
+        hyphens: auto;
+      }
+
+      .caption {
+        /*layout for the footnotes*/
+        text-align: right;
+      }
+
+      /*end of Marias additions to the stylesheet*/
+    </style>
+  </head>
+
+  <body>
+    <div id="Storypart" class="row">
+      <div
+        class="col-sm-2"
+        style="background-image: url('backgroundimage_space.jpg');"
+      ></div>
+
+      <!-- start middle part of the page#############################################-->
+
+      <div class="col-sm-8" style="background-color: white;">
+        <!--START OF Marias WORK-->
+
+        <p id="title" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <image
+              href="images/crashtest/crashtest_title.png"
+              alt="Mind the Data Gap Title Image"
+              width="50%"
+              height="100%"
+              style="padding-bottom: 20px;"
+              x="250"
+            />
+          </svg>
+        </p>
+
+        <p id="row-00" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <image
+              id="panel-00"
+              href="images/crashtest/Panel-00.png"
+              width="100%"
+              height="100%"
+            />
+          </svg>
+        </p>
+
+        <p id="row-01" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <!--comic panel-->
+            <image
+              id="panel-01"
+              href="images/crashtest/Panel-01.png"
+              width="100%"
+              height="100%"
+            />
+            <!--infobutton-->
+            <image
+              id="infobutton01"
+              class="pointer"
+              href="images/icons/infobutton.svg"
+              x="969"
+              y="303"
+              width="30"
+              height="30"
+            >
+              <title>Click here to see all references</title>
+              <!--title appear at the mouse tooltip-->
+            </image>
+            <!--playbutton for the video-->
+            <image
+              id="playbutton"
+              class="pointer"
+              href="images/icons/playbutton.svg"
+              x="470"
+              y="35"
+              width="70"
+              height="70"
+              opacity="0.9"
+            >
+              <title>Click here to see the video</title>
+            </image>
+            <!--video embedding-->
+            <foreignObject
+              id="crashtest-video"
+              x="190"
+              y="30"
+              width="500"
+              height="270"
+              style="display: none;"
+            >
+              <embed
+                src="https://www.youtube.com/embed/fTWjL1ij_sM"
+                width="500"
+                height="270"
+                allowscriptaccess="always"
+                allowfullscreen="true"
+              ></embed>
+            </foreignObject>
+            <!--references/footer-->
+            <foreignObject
+              id="sources01"
+              x="0"
+              y="333"
+              width="1000"
+              height="50"
+              style="display: none;"
+            >
+              <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                Kahane 2004; Kahane 2013; National Safety Council 2022
+              </div>
+            </foreignObject>
+          </svg>
+        </p>
+
+        <p id="row-02" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <image
+              id="panel-02"
+              href="images/crashtest/Panel-02.png"
+              width="100%"
+              height="100%"
+            />
+            <rect
+              id="rectangle_02a"
+              class="pointer"
+              x="330"
+              y="100"
+              width="380"
+              height="200"
+              fill="transparent"
+            >
+              <title>More Information</title>
+            </rect>
+            <!--transparent rectangle for enabling the interaction via click-->
+            <rect
+              id="rectangle_02b"
+              x="330"
+              y="100"
+              width="380"
+              height="200"
+              stroke="black"
+              fill="#ffffff"
+              opacity="0.9"
+              style="display: none;"
+            />
+            <!--popup with additional information-->
+            <foreignObject
+              id="add_info02"
+              x="330"
+              y="100"
+              width="380"
+              height="200"
+              style="display: none;"
+            >
+              <div xmlns="http://www.w3.org/1999/xhtml" class="popup">
+                This imbalance stems from the fact that men
+                <b>drive more miles</b> and engage in <b>risky behavior</b> more
+                often (speeding, not wearing a seat belt, drunk driving). Thus,
+                research is <b>biased towards male occupants</b>. Fewer studies
+                focus on the question whether occupants of either sex benefit
+                equally from safety devices such as seat belts and airbags.
+              </div>
+            </foreignObject>
+            <image
+              id="infobutton02"
+              class="pointer"
+              href="images/icons/infobutton.svg"
+              x="969"
+              y="303"
+              width="30"
+              height="30"
+            >
+              <title>Click here to see all references</title>
+            </image>
+            <foreignObject
+              id="sources02"
+              x="0"
+              y="333"
+              width="1000"
+              height="50"
+              style="display: none;"
+            >
+              <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                Barry 2019; Bose et al. 2011; Carter et al. 2014; Shaver 2012
+              </div>
+            </foreignObject>
+          </svg>
+        </p>
+
+        <p id="row-03" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <svg width="48%" height="100%" overflow="visible">
+              <image
+                id="panel-03"
+                href="images/crashtest/Panel-03.png"
+                width="500"
+                height="333"
+              ></image>
+              <image
+                id="infobutton03"
+                class="pointer"
+                href="images/icons/infobutton.svg"
+                x="470"
+                y="303"
+                width="30"
+                height="30"
+              >
+                <title>Click here to see all references</title>
+              </image>
+              <foreignObject
+                id="sources03"
+                x="0"
+                y="333"
+                width="500"
+                height="50"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                  Barry 2019; Lindner & Svedberg 2019
+                </div>
+              </foreignObject>
+            </svg>
+
+            <svg width="48%" height="100%" overflow="visible" x="505">
+              <image
+                id="panel-4a"
+                href="images/crashtest/Panel-4a.png"
+                width="500"
+                height="333"
+              ></image>
+
+              <rect
+                id="rectangle_4a"
+                class="pointer"
+                x="370"
+                y="110"
+                width="100"
+                height="120"
+                fill="transparent"
+              >
+                <title>Click here to reveal the explanation</title>
+              </rect>
+
+              <image
+                id="infobutton4a"
+                class="pointer"
+                href="images/icons/infobutton.svg"
+                x="470"
+                y="303"
+                width="30"
+                height="30"
+              >
+                <title>Click here to see all references</title>
+              </image>
+
+              <foreignObject
+                id="sources4a"
+                x="0"
+                y="333"
+                width="500"
+                height="50"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                  Kahane 2013
+                </div>
+              </foreignObject>
+            </svg>
+          </svg>
+        </p>
+
+        <p id="row-04" class="container" style="display: none;">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <image
+              id="panel-4b"
+              href="images/crashtest/Panel-4b.png"
+              width="100%"
+              height="100%"
+            />
+            <!--visualization of the fatality risk difference realized with svg circles with the according measurements-->
+            <svg
+              id="fatality-visualisation"
+              x="260"
+              y="25"
+              width="450"
+              height="240"
+            >
+              <g id="fatality-circles" transform="scale(3)">
+                <circle
+                  id="fatality_men"
+                  cx="40"
+                  cy="40"
+                  r="29"
+                  fill="#3396ff"
+                />
+                <circle
+                  id="fatality_women"
+                  cx="110"
+                  cy="40"
+                  r="33"
+                  fill="#ff7a7a"
+                ></circle>
+              </g>
+            </svg>
+            <image
+              id="infobutton4b"
+              class="pointer"
+              href="images/icons/infobutton.svg"
+              x="969"
+              y="303"
+              width="30"
+              height="30"
+            >
+              <title>Click here to see all references</title>
+            </image>
+            <foreignObject
+              id="sources4b"
+              x="0"
+              y="333"
+              width="1000"
+              height="50"
+              style="display: none;"
+            >
+              <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                Bose et al. 2019; Kahane 2013; National Center for Statistics
+                and Analysis 2022
+              </div>
+            </foreignObject>
+          </svg>
+        </p>
+
+        <p id="row-05" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <svg width="48%" height="100%" overflow="visible">
+              <image
+                id="panel-05"
+                href="images/crashtest/Panel-05.png"
+                width="500"
+                height="333"
+              />
+              <rect
+                id="rectangle_05a"
+                class="pointer"
+                x="215"
+                y="70"
+                width="40"
+                height="40"
+                fill="transparent"
+              >
+                <title>More information</title>
+              </rect>
+              <rect
+                id="rectangle_05b"
+                x="270"
+                y="65"
+                width="200"
+                height="265"
+                stroke="black"
+                fill="#ffffff"
+                opacity="0.9"
+                style="display: none;"
+              />
+              <foreignObject
+                id="add_info05a"
+                x="270"
+                y="65"
+                width="200"
+                height="265"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="popup">
+                  For example, women have a higher risk to suffer from
+                  <b>whiplash injuries</b>
+                  because of weaker neck muscles and anthropometry. It is also
+                  suspected that the head restraint, though designed
+                  specifically to minimize neck injuries, doesn't benefit
+                  females.
+                </div>
+              </foreignObject>
+              <rect
+                id="rectangle_05c"
+                class="pointer"
+                x="90"
+                y="240"
+                width="40"
+                height="40"
+                fill="transparent"
+              >
+                <title>More information</title>
+              </rect>
+              <rect
+                id="rectangle_05d"
+                x="-130"
+                y="195"
+                width="220"
+                height="195"
+                stroke="black"
+                fill="#ffffff"
+                opacity="0.9"
+                style="display: none;"
+              />
+              <foreignObject
+                id="add_info05b"
+                x="-130"
+                y="195"
+                width="220"
+                height="195"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="popup">
+                  The seating position of female drivers differs from male
+                  drivers. The
+                  <b>proximity to the primary point of impact</b> and the
+                  <b>angle of their hips and knees</b> makes their shorter legs
+                  prone to injury.
+                </div>
+              </foreignObject>
+              <rect
+                id="rectangle_05e"
+                class="pointer"
+                x="80"
+                y="70"
+                width="40"
+                height="40"
+                fill="transparent"
+              >
+                <title>More information</title>
+              </rect>
+              <rect
+                id="rectangle_05f"
+                x="-130"
+                y="-35"
+                width="200"
+                height="220"
+                stroke="black"
+                fill="#ffffff"
+                opacity="0.9"
+                style="display: none;"
+              />
+              <foreignObject
+                id="add_info05c"
+                x="-130"
+                y="-35"
+                width="200"
+                height="220"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="popup">
+                  As most women are smaller than men, their
+                  <b>seat is more upright</b> to see over the dashboard and
+                  <b>closer to the pedals</b> to reach them, bringing their
+                  heads and chests closer to the steering wheel and its air bag.
+                </div>
+              </foreignObject>
+              <image
+                id="infobutton05"
+                class="pointer"
+                href="images/icons/infobutton.svg"
+                x="470"
+                y="303"
+                width="30"
+                height="30"
+              >
+                <title>Click here to see all references</title>
+              </image>
+              <foreignObject
+                id="sources05"
+                x="0"
+                y="333"
+                width="500"
+                height="50"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                  Barry 2019; Bose et al. 2011; Shaver 2012
+                </div>
+              </foreignObject>
+            </svg>
+
+            <svg width="58%" height="100%" overflow="visible" x="505">
+              <image
+                id="panel-06"
+                href="images/crashtest/Panel-06.png"
+                width="500"
+                height="333"
+              />
+              <rect
+                id="rectangle_06a"
+                class="pointer"
+                x="380"
+                y="130"
+                width="100"
+                height="100"
+                fill="transparent"
+              >
+                <title>More information</title>
+              </rect>
+              <rect
+                id="rectangle_06b"
+                x="140"
+                y="130"
+                width="250"
+                height="200"
+                stroke="black"
+                fill="#ffffff"
+                opacity="0.9"
+                style="display: none;"
+              />
+              <foreignObject
+                id="add_info06"
+                x="140"
+                y="130"
+                width="250"
+                height="200"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="popup">
+                  Crash testing with female dummies is crucial, because most
+                  automakers engineer their cars according to the
+                  <b>requirements of the crash tests</b>. Thus, the tests should
+                  model the <b>use of cars in the real world</b>, where 50% of
+                  the drivers are women.
+                </div>
+              </foreignObject>
+              <image
+                id="infobutton06"
+                class="pointer"
+                href="images/icons/infobutton.svg"
+                x="470"
+                y="303"
+                width="30"
+                height="30"
+              >
+                <title>Click here to see all references</title>
+              </image>
+              <foreignObject
+                id="sources06"
+                x="0"
+                y="333"
+                width="500"
+                height="50"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                  Barry 2019, Lindner & Svedberg 2019; Stanford University
+                </div>
+              </foreignObject>
+            </svg>
+          </svg>
+        </p>
+
+        <p id="row-06" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <svg width="48%" height="100%" overflow="visible">
+              <image
+                id="panel-07"
+                href="images/crashtest/Panel-07.png"
+                width="500"
+                height="333"
+              />
+              <image
+                id="infobutton07"
+                class="pointer"
+                href="images/icons/infobutton.svg"
+                x="470"
+                y="303"
+                width="30"
+                height="30"
+              >
+                <title>Click here to see all references</title>
+              </image>
+              <foreignObject
+                id="sources07"
+                x="0"
+                y="333"
+                width="500"
+                height="50"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                  Kahane 2013; Noh et al. 2022
+                </div>
+              </foreignObject>
+            </svg>
+
+            <svg width="48%" height="100%" overflow="visible" x="505">
+              <image
+                id="panel-08"
+                href="images/crashtest/Panel-08.png"
+                width="500"
+                height="333"
+              />
+              <rect
+                id="rectangle_08"
+                class="pointer"
+                x="90"
+                y="120"
+                width="120"
+                height="150"
+                fill="transparent"
+              >
+                <title>More information</title>
+              </rect>
+              <image
+                id="infobutton08"
+                class="pointer"
+                href="images/icons/infobutton.svg"
+                x="470"
+                y="303"
+                width="30"
+                height="30"
+              >
+                <title>Click here to see all references</title>
+              </image>
+              <foreignObject
+                id="sources08"
+                x="0"
+                y="333"
+                width="500"
+                height="50"
+                style="display: none;"
+              >
+                <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                  World Health Organisation 2022
+                </div>
+              </foreignObject>
+            </svg>
+          </svg>
+        </p>
+
+        <p id="row-07" class="container" style="display: none;">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <svg width="50%" height="333" overflow="visible" x="250">
+              <image
+                id="global-traffic-deaths"
+                href="images/crashtest/global-traffic-deaths.png"
+                width="500"
+                height="333"
+              />
+              <image
+                id="closebutton07"
+                class="pointer"
+                href="images/icons/closebutton.svg"
+                x="470"
+                y="2"
+                width="30"
+                height="30"
+              >
+                <title>Close</title>
+              </image>
+            </svg>
+          </svg>
+        </p>
+
+        <p id="row-08" class="container">
+          <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+            <image
+              id="panel-09"
+              href="images/crashtest/Panel-09.png"
+              width="100%"
+              height="100%"
+            />
+            <rect
+              id="rectangle_09a"
+              class="pointer"
+              x="666"
+              y="130"
+              width="300"
+              height="70"
+              fill="transparent"
+            >
+              <title>Go to the next part</title>
+            </rect>
+            <rect
+              id="rectangle_09b"
+              class="pointer"
+              x="750"
+              y="253"
+              width="250"
+              height="60"
+              fill="transparent"
+            >
+              <title>
+                https://www.consumerreports.org/car-safety/crash-test-bias-how-male-focused-testing-puts-female-drivers-at-risk/
+              </title>
+            </rect>
+          </svg>
+        </p>
+
+        <p id="footer">
+          Note: The data at hand originate exclusively in the USA. <br />
+          If you want to take a closer look at the references of this comic, go
+          to the
+          <b><a class="page-link" href="Sources.html">references page</a></b>
+        </p>
+
+        <!--end of Marias part of the page-->
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="Intro.html">Intro</a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="Crashtest.html">Crashtest</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="Health.html">Health</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="Outro.html">Outro</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="Sources.html">References</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div
+        class="col-sm-2"
+        style="background-image: url('backgroundimage_space.jpg');"
+      ></div>
+    </div>
+
+    <!--footer with ggf. Sources, Names, Credits etc.-->
+    <div id="footer" class="row">
+      <div
+        class="col-sm-2"
+        style="background-image: url('backgroundimage_space.jpg');"
+      ></div>
+
+      <div id="footer" class="col-sm-8" style="background-color: grey;">
+        <p style="color: white;">
+          Data Comic designed by Mareike Link, Maria Zieglmeier & Josephine
+          Euler
+        </p>
+      </div>
+      <div
+        class="col-sm-2"
+        style="background-image: url('backgroundimage_space.jpg');"
+      ></div>
+    </div>
+  </body>
+</html>
