@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
@@ -9,16 +14,14 @@ import Projects from "./components/Projects";
 function App() {
   return (
     <>
-      <Router>
+      <Router basename="/marias-uni-projects.github.io">
         <div className="container">
           <Header />
           <Routes>
-            <Route path="/">
-              <Route index element={<Home/>} />
-              <Route path="marias-uni-projects.github.io" element={<Navigate to="/" />} />
-              <Route path="projects" element={<Projects/>} />
-              <Route path="about" element={<About/>} />
-            </Route> 
+            <Route index element={<Home />} />
+            {/* <Route path="marias-uni-projects.github.io" element={<Navigate to="/" />} /> */}
+            <Route path="projects" element={<Projects />} />
+            <Route path="about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
