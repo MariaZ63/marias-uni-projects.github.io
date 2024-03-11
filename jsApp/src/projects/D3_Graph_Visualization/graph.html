@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <title>Graph Visualization</title>
+  <style>
+    body {
+      margin: 50px;
+      font-family: Arial;
+    }
+
+    h2 {
+      clear: both;
+    }
+
+    svg {
+      float: left;
+      border: 1px solid black;
+      margin-bottom: 20px;
+    }
+
+    #selection_details {
+      float: left;
+      width: 500px;
+      height: 580px;
+      overflow: auto;
+      border: 1px solid black;
+      font-size: 9pt;
+      margin-left: 5px;
+      padding: 10px;
+      background: #eee;
+    }
+
+    circle {
+      fill: #0050aa;
+    }
+
+    .links {
+      opacity: 0.6;
+    }
+  </style>
+  <script src="https://d3js.org/d3.v7.js"></script>
+</head>
+
+<body>
+  <p>Maria Zieglmeier</p>
+  <h1>
+    Graph Visualization: Visualizing relationships among keywords of research
+    publications
+  </h1>
+  <p>Graded Homework Assignment 03</p>
+  <p>
+    Lecture <i>Grundlagen der Informationsvisualisierung</i>, University of
+    Bamberg, summer semester 2023
+  </p>
+
+  <svg width="800" height="600"></svg>
+  <div id="selection_details"></div>
+
+  <script src="graph.js"></script>
+
+  <h2>Explanations:</h2>
+  <p>
+    <ul>
+        <li>I took the liberty of modifying the template to conform to current web development standards, e.g. moving the data and the javascript code to separate files. </li>
+        <li>First, I filtered the given data and determined the nodes (=keywords) and their weight (=number of publications associated with a keyword)</li>
+        <li>After that, I did the same for the edges (=publication sharing both keywords) and their weight (=number of publications sharing both keywords)</li>
+        <li>Then I was able to exchange the dummy data with the actual data, leading to a graph.</li>
+        <li>I slightly adjusted the forces so that the provided space is used optimally.</li>
+        <li>Subsequently, I added a legend showing the node size encoding.</li>
+        <li>The interactivity was obtained by a click event on a node.</li>
+        <li>Clicking on a node sets its opacity to 1. Its name, the number of the associated publications and the list of associated publications are appended to the grey div next to the graph.</li>
+        <li>I then adjusted the graph layout: I filtered the nodes and the links so that only the nodes with a weight >= 3 are shown.</li>
+        <li>Finally, I changed the link weight to link.weight/Math.min(node1.weight, node2.weight) and adjusted the filter so that only the links with a weight >= 0.5 are displayed.</li>
+      </ul>
+  </p>
+
+  <h2>(Optional) Observed Insights:</h2>
+
+  <ul>
+    <li>[Mention first insight here]</li>
+    <li>[Mention second insight here]</li>
+  </ul>
+
+  <h2>References</h2>
+
+  <ul>
+    <li>
+      <a href="https://bl.ocks.org/mbostock/4062045">Force-Directed Graph</a>
+    </li>
+    <li><a href="https://observablehq.com/@ben-tanen/a-tutorial-to-using-d3-force-from-someone-who-just-learned-ho">A tutorial to using d3-force from someone who just learned how to use it</a></li>
+    <li>...</li>
+  </ul>
+</body>

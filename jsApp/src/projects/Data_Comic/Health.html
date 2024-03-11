@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exploring the Data Gap - Health</title>
+    <link rel="stylesheet" href="bootstrap-5.3.0-dist/css/bootstrap.css">
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="script_health.js"></script> <!-- written in Javascript -->
+
+    <style> /*written in CSS*/
+        div {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            padding-top: 5px;
+            padding-right: 20px;
+            padding-bottom: 5px;
+            padding-left: 20px;
+            display: block; /* display block: entire line, nothing can be displayed left or right */
+        }
+
+        img { border: 1px solid rgb(0, 0, 0);
+        }
+
+        svg { border: 1px solid rgb(0, 0, 0); 
+        }
+
+        .pointer {
+        cursor: pointer;
+        }
+
+        .noframe {
+            border: 0px none rgb(0, 0, 0); /* class for title image*/
+        }
+
+        .dashedframe {
+            border: 1px dashed rgb(0, 0, 0); /*dashed frame for optional panels*/
+        }
+
+        .caption {
+            text-align: right;
+        }
+
+        .popup {
+            padding-left: 10px; /*pop up class for pop-up annotations*/
+            padding-right: 10px; 
+            padding-top: 2px;
+            text-align: left;
+            hyphens: auto;
+        }
+        
+    </style>
+       
+</head>
+
+
+<body>
+
+    <div id="Storypart" class="row">
+
+    <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+    </div>
+
+    <!-- MAIN PART -->
+    <div class="col-sm-8" style="background-color:white;">
+ 
+
+        <!-- DIV for Title Image - exception: no frame -->
+            <div>
+                <p id="p0">
+                    <!-- frame removed by class .noframe -->
+                    <svg class="noframe" width="1000" height="333" overflow="invisible"> 
+                    <image id="p0i" class="noframe" href="images/health/p0.png"  width="1000" height="333"> </image>
+                    </svg>
+                </p>
+            </div>
+
+         <!-- Panels that do not contain clickable content are implemented as simple paragraphs containing images -->
+            <p id="p1">
+                <img src="images/health/p1.png" width="1000" height="333">
+            </p>
+
+            <p id="p2">
+                <img src="images/health/p2.png" width="1000" height="333">
+       
+            </p>
+
+            <!-- Panels that contain clickable content, foreign objects, etc. are implementend as paragraphs containing SVGs-->
+            <p id="p3p4" class="container"></p>
+                <img src="images/health/p3.png" width="500" height="333">
+                <!--SVG element with invisible overflow to not risking concealing of frames-->
+                <svg width="500" height="333" overflow="invisible"> 
+                    <image id="4i" href="images/health/p4.png"  width="500" height="333"> </image>
+                    <rect id="rect4" class="pointer" x="50" y="120" width="100" height="120" fill="white" fill-opacity="0" />
+                </svg>
+             </p>
+
+             <!-- 5 = annotation panels
+            order of opening and closing not as in real smartphone use, reason: ability to open everything important-->
+             <p id="p5p5a" style="display:none" class="container">
+                <!-- no container, to make hiding svg 5a possible without destroying layout -->
+                <!-- working with svg id, since elements of paragraph shall be able to open separately -->
+                <svg id="5" class="dashedframe" svg width="500" height="333" overflow="invisible">
+                    <image id="5i" href="images/health/p5.png" width="500" height="333"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="925" height="50" opacity="0.7"> </image>
+                    <rect id="rect5close" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                    <rect id="rect5" class="pointer" x="160" y="45" width="180" height="120" fill="grey" fill-opacity="0" />
+                    <!-- rect 51 leads to 5aa smartphone scroll-->
+                    <rect id="rect5scroll" class="pointer" x="230" y="260" width="35" height="40" fill="grey" fill-opacity="0" />
+                </svg>
+
+                <!-- important for infobutton: overflow visible, to show space beneath panel, 
+                    then necessary to make picture smaller, otherwise it conceales frame,
+                    style="display:none" needs to be in foreign Object, not in div,
+                    otherwise caption does not get shown at all-->
+                <svg id="5a" class="dashedframe" svg width="500" height="333" overflow="visible" style="display:none">
+                    <image id="5ai" href="images/health/p5a.png" width="498" height="331"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="925" height="50" opacity="0.7"> </image>
+                    <rect id="rect5aclose" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                    <!-- Infobutton: -->
+                    <image id="infobutton5a" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all references</title>
+                    </image>
+                    <foreignObject id="sources5a" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption" >
+                           Dutta et al. 2022, 19
+                        </div>
+                    </foreignObject>  
+
+                </svg>
+             </p>
+
+            <p id="p5aa5b" style="display:none">
+                <!-- no container, to make hiding svg 5aa possible without destroying layout -->
+                <!-- working with svg id, since elements of paragraph shall be able to open separately -->
+                <svg id="5aa" class="dashedframe" svg width="500" height="333" overflow="invisible">
+                    <image id="5aai" href="images/health/p5aa.png" width="500" height="333"> </image>
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="925" height="50" opacity="0.7"> </image>
+                    <!-- Closebutton -->
+                    <rect id="rect5aaclose" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                    <rect id="rect5aa" class="pointer" x="160" y="130" width="180" height="120" fill="grey" fill-opacity="0" />
+                    <rect id="rect5aascroll" class="pointer" x="230" y="50" width="35" height="40" fill="grey" fill-opacity="0" />
+                </svg>
+
+                <svg id="5b" class="dashedframe" svg width="500" height="333" overflow="visible" style="display:none">
+                    <image id="5bi" href="images/health/p5b.png" width="498" height="331"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="925" height="50" opacity="0.7"> </image>
+                    <rect id="rect5bclose" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                    <!-- Infobutton: -->
+                    <image id="infobutton5b" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all references</title>
+                    </image>
+                    <foreignObject id="sources5b" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Dutta et al. 2022, 70
+                        </div>
+                    </foreignObject>  
+                </svg>
+            </p>
+
+
+            <p id="p6p6a" class="container"></p>
+            <svg id="6" svg width="500" height="333" overflow="visible" >
+                <image id="6i" href="images/health/p6.png" width="498" height="331"> </image>
+                <!-- Infobutton: -->
+                <image id="infobutton6" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                    <title>Click here to see all references</title>
+                </image>
+                <foreignObject id="sources6" x="0" y="333" width="460" height="50" style="display:none">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="caption" >
+                       Dutta et al. 2022, 19
+                    </div>
+                </foreignObject>  
+            </svg>
+            <svg id="6a"  svg width="500" height="333" overflow="visible" >
+                <image id="6ai" href="images/health/p6a.png" width="498" height="331"> </image>
+                <!-- Infobutton: -->
+                <image id="infobutton6a" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                    <title>Click here to see all references</title>
+                </image>
+                <foreignObject id="sources6a" x="0" y="333" width="460" height="50" style="display:none">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="caption" >
+                       Dutta et al. 2022, 70
+                    </div>
+                </foreignObject>  
+            </svg>
+            </p>
+
+
+            <p id="p7">
+                <img src="images/health/p7.png" width="1000" height="333">
+            </p>
+
+            <p id="p8p9" class="container"></p>
+                    <img src="images/health/p8.png" width="500" height="333">
+                    <img src="images/health/p9.png" width="500" height="333">
+            </p>
+
+            <p id="p10p11" class="container"></p>
+                    <img src="images/health/p10.png" width="500" height="333">
+                     <!-- falling-->
+                    <svg id="11" svg width="500" height="333" overflow="visible">
+                        <image id="11i" href="images/health/p11.png" width="498" height="331"> </image>
+                        <!-- sound falling -->
+                        <rect id="rect11" class="pointer" x="200" y="225" width="80" height="20" fill="grey" fill-opacity="0" />
+                    </svg>
+            </p>
+
+            <p id="p12p13" class="container"></p>
+                    <img src="images/health/p12.png" width="500" height="333">
+                    <img src="images/health/p13.png" width="500" height="333">
+            </p>
+
+            <p id="p14">
+                <img src="images/health/p14.png" width="1000" height="333">
+            </p>
+
+            <p id="p15">
+                <img src="images/health/p15.png" width="1000" height="333">
+            </p>
+
+            <p id="p16p17" class="container"></p>
+             <img src="images/health/p16.png" width="500" height="333">
+             <!-- SVG element with invisible overflow to not risking visibility of frames-->
+               <svg width="500" height="333" overflow="invisible"> 
+                 <image id="p17i" href="images/health/p17.png"  width="500" height="333"> </image>
+                 <rect id="rectp17" class="pointer" x="250" y="80" width="50" height="80" fill="grey" fill-opacity="0" />
+             </svg>
+             </p>
+
+              <!-- 18 annotation panel: patient file  -->
+            <p id="p18" style="display:none">
+                <svg id="18" class="dashedframe" svg width="500" height="333" overflow="visible">
+                    <image id="p18i" href="images/health/p18.png" width="498" height="331"> </image>
+                    <!-- Closebutton-->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="925" height="50" opacity="0.7"> </image>
+                    <rect id="rect18close" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                </svg>
+            </p>
+
+
+             <p id="p19p20" class="container"></p>
+                <img src="images/health/p19.png" width="500" height="333">
+                <svg width="500" height="333" overflow="visible">
+                    <image id="20" href="images/health/p20.png" width="498" height="331"> </image>
+                    <rect id="rect20" class="pointer" x="290" y="60" width="170" height="110" fill="grey" fill-opacity="0" />
+                      <!-- Infobutton: -->
+                      <image id="infobutton20" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all references</title>
+                    </image>
+                    <foreignObject id="sources20" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Fleck et al. 2021
+                        </div>
+                    </foreignObject>  
+                </svg>
+                </svg>
+             </p>
+
+            <!-- 21 annotation panels: touch screen -->  
+
+            <p id="p21p21ap21b" style="display:none">
+                <!-- no container, to make hiding svgs possible without destroying layout -->
+                <!-- working with svg id, since elements of paragraph shall be able to open separately -->
+                <svg id="21" class="dashedframe" svg width="500" height="333" overflow="visible">
+                    <image id="21i" href="images/health/p21.png" width="498" height="331"> </image>
+                    <!-- Closebutton-->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                    <rect id="rect21close" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                     <!-- rect21a closes this and opens next panel -->
+                    <rect id="rect21a" class="pointer" x="400" y="260" width="60" height="40" fill="grey" fill-opacity="0" />
+                    <rect id="rect21left" class="pointer" x="50" y="260" width="60" height="40" fill="grey" fill-opacity="0" />
+                     <!-- Infobutton: -->
+                     <image id="infobutton21" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all sources</title>
+                    </image>
+                    <foreignObject id="sources21" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Fleck et al. 2021, 25
+                        </div>
+                    </foreignObject> 
+                </svg>
+
+                <svg id="21a" class="dashedframe" svg width="500" height="333" overflow="visible" style="display:none">
+                    <image id="21ai" href="images/health/p21a.png" width="498" height="331"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                    <rect id="rect21aclose" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                    <!-- rect21b closes this and opens next panel -->
+                    <rect id="rect21b" class="pointer" x="400" y="260" width="60" height="40" fill="grey" fill-opacity="0" />
+                    <!-- rect21bleft closes this and opens last panel -->
+                    <rect id="rect21aleft" class="pointer" x="50" y="260" width="60" height="40" fill="grey" fill-opacity="0" />
+                     <!-- Infobutton: -->
+                     <image id="infobutton21a" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all sources</title>
+                    </image>
+                    <foreignObject id="sources21a" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Fleck et al. 2021, 25
+                        </div>
+                    </foreignObject> 
+                </svg>
+
+                <svg id="21b" class="dashedframe" svg width="500" height="333" overflow="visible" style="display:none">
+                    <image id="21bi" href="images/health/p21b.png" width="498" height="331"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                    <rect id="rect21bclose" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                     <!-- rect21left closes this and opens last panel -->
+                     <rect id="rect21bleft" class="pointer" x="50" y="260" width="60" height="40" fill="grey" fill-opacity="0" />
+                      <!-- Infobutton: -->
+                      <image id="infobutton21b" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all sources</title>
+                    </image>
+                    <foreignObject id="sources21b" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Fleck et al. 2021, 25
+                        </div>
+                    </foreignObject> 
+                </svg>
+            </p>
+
+
+            <p id="p22p23" class="container">
+                <img src="images/health/p22.png" width="500" height="333">
+                <svg width="500" height="333" overflow="invisible"> 
+                    <image id="23i" href="images/health/p23.png"  width="500" height="333"> </image>
+                    <rect id="rect24" class="pointer" x="370" y="225" width="50" height="60" fill="grey" fill-opacity="0" />
+                </svg>
+            </p>
+
+            <!-- 24 annotation panel: Deutscher Ärzteverlag -->  
+            <p id="p24" style="display:none">
+                <svg id="24" class="dashedframe" svg width="500" height="333" overflow="visible">
+                    <image id="24i" href="images/health/p24.png" width="498" height="331"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                    <rect id="rect24close" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                     <!-- rect21a closes this and opens next panel -->
+                     <!-- opens https://www.aerzteblatt.de/nachrichten/sw/Gendermedizin?s=&p=1&n=1&aid=216908 -->
+                    <rect id="rect24link" class="pointer" x="110" y="260" width="270" height="60" fill="grey" fill-opacity="0" />
+                      <!-- Infobutton: -->
+                      <image id="infobutton24" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all references</title>
+                    </image>
+                    <foreignObject id="sources24" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Richter-Kuhlmann 2020
+                        </div>
+                    </foreignObject>  
+                </svg>
+
+            <p id="p25p26" class="container"></p>
+                <img src="images/health/p25.png" width="500" height="333">
+                <img src="images/health/p26.png" width="500" height="333">
+            </p>
+
+            <p id="p26-ap26a" class="container">
+                <img src="images/health/p26-a.png" width="500" height="333">
+                <svg id="26-a" svg width="500" height="333" overflow="visible">
+                    <image id="26ai" href="images/health/p26a.png" width="498" height="331"> </image>
+                    <rect id="rect26a" class="pointer" x="325" y="30" width="55" height="60" fill="grey" fill-opacity="0" />
+                     <!-- Infobutton: -->
+                     <image id="infobutton26a" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all sources</title>
+                    </image>
+                    <foreignObject id="sources26a" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Fleck et al. 2020, 9
+                        </div>
+                    </foreignObject>  
+                </svg>
+            </p>
+
+            <!-- 24 additional panel: Population -->
+            <p id="p26b" class="container"></p>
+                <svg id="26b" class="dashedframe" svg width="500" height="333" overflow="visible" style="display:none">
+                    <image id="26bi" href="images/health/p26b.png" width="498" height="331"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                    <rect id="rect26bclose" class="pointer" x="443" y="7" width="40" height="40" fill="grey" fill-opacity="0" />
+                        <!-- Infobutton: -->
+                    <image id="infobutton26b" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                            <title>Click here to see all sources</title>
+                    </image>
+                    <foreignObject id="sources26b" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                               Fleck et al. 2020, 9
+                        </div>
+                    </foreignObject>  
+                </svg>
+            </p>
+
+            <p id="p27p29" class="container"></p>
+            <svg id="27" svg width="500" height="333" overflow="invisible">
+                <image id="27i" href="images/health/p27.png" width="500" height="333"> </image>
+                <rect id="rect27" class="pointer" x="250" y="80" width="55" height="60" fill="grey" fill-opacity="0" />
+            </svg>
+                <img src="images/health/p29.png" width="500" height="333">
+            </p>
+
+            <!-- 28 = additional panel: patients file-->  
+            <p id="p28" class="container" style="display:none">
+                <svg id="28" class = "dashedframe" svg width="500" height="333" overflow="invisible" >
+                    <image id="28i" href="images/health/p28.png" width="498" height="331"> </image>
+                     <!--Closebutton-->
+                     <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                     <rect id="rect28close" class="pointer" x="443" y="7" width="30" height="30" fill="grey" fill-opacity="0" />
+                </svg>
+            </p>
+
+            <p id="p30p31" class="container">
+                <img src="images/health/p30.png" width="500" height="333">
+                <svg id="31" svg width="500" height="333" overflow="visible">
+                    <image id="31" href="images/health/p31.png" width="498" height="331"> </image>
+                    <rect id="rect31" class="pointer" x="240" y="50" width="170" height="140" fill="grey" fill-opacity="0" />
+                           <!-- Infobutton: -->
+                           <image id="infobutton31" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                            <title>Click here to see all references</title>
+                        </image>
+                        <foreignObject id="sources31" x="0" y="333" width="480" height="50" style="display:none">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                               Jin et al. 2020, 3
+                            </div>
+                        </foreignObject>  
+                </svg>
+            </p>
+
+            <!-- 32 = additonal panel: wall --> 
+            <p id="p31a" class="container">
+                <svg id="31a" class="dashedframe"svg width="500" height="333" overflow="visible" style="display:none">
+                 <image id="31ai" href="images/health/p31a.png" width="498" height="331"> </image>
+                 <!--Closebutton-->
+                 <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                 <rect id="rect31aclose" class="pointer" x="443" y="7" width="30" height="30" fill="grey" fill-opacity="0" />
+                <!-- Infobutton: -->
+                <image id="infobutton31a" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                <title>Click here to see all references</title>
+                    </image>
+                    <foreignObject id="sources31a" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Jin et al. 2020, 3
+                        </div>
+                    </foreignObject>  
+                 </svg>
+             </p>
+
+            <!-- note: 33 not existing-->  
+
+            <p id="p34p36" class="container"></p>
+            <svg width="500" height="333" overflow="invisible"> 
+                <image id="34" href="images/health/p34.png"  width="500" height="333"> </image>
+                <rect id="rect34" class="pointer" x="450" y="270" width="40" height="35" fill="grey" fill-opacity="0" />
+            </svg>
+            <svg width="500" height="333" overflow="visible"> 
+                <image id="36" href="images/health/p36.png"  width="498" height="331"> </image>
+                <!-- Infobutton: -->
+                <image id="infobutton36" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                    <title>Click here to see all references</title>
+                </image>
+                <foreignObject id="sources36" x="0" y="333" width="460" height="50" style="display:none">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                       Brady et al. 2021, 1
+                    </div>
+                </foreignObject>  
+            </svg>
+            </p>
+
+            <!-- 35 = pop-up: Covid-19 studies--> 
+            <p id="p35p35a" class="container" >
+                <svg id="35" class="dashedframe"svg width="500" height="333" overflow="visible" style="display:none">
+                    <image id="35i" href="images/health/p35.png" width="498" height="331"> </image>
+                    <!--Closebutton-->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                    <rect id="rect35close" class="pointer" x="443" y="7" width="30" height="30" fill="grey" fill-opacity="0" />
+                    <rect id="rect35" class="pointer" x="380" y="135" width="90" height="30" fill="grey" fill-opacity="0" /> 
+                           <!-- Infobutton: -->
+                           <image id="infobutton35" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                            <title>Click here to see all references</title>
+                        </image>
+                        <foreignObject id="sources35" x="0" y="333" width="460" height="50" style="display:none">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                               Brady et al. 2021, 1
+                            </div>
+                        </foreignObject>  
+                </svg>
+                <svg id="35a" class="dashedframe"svg width="500" height="333" overflow="visible" style="display:none">
+                    <image id="35ai" href="images/health/p35a.png" width="498" height="331"> </image>
+                    <!-- Closebutton -->
+                    <image id="closebutton01" class="pointer" href="images/icons/closebutton.svg" width="952" height="45" opacity="0.7"> </image>
+                    <rect id="rect35aclose" class="pointer" x="443" y="7" width="30" height="30" fill="grey" fill-opacity="0" />
+                           <!-- Infobutton: -->
+                           <image id="infobutton35a" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                            <title>Click here to see all references</title>
+                        </image>
+                        <foreignObject id="sources35a" x="0" y="333" width="460" height="50" style="display:none">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                               Brady et al. 2021, 1
+                            </div>
+                        </foreignObject>  
+                </svg>
+            </p>
+                
+
+            <p id="p37p38" class="container"></p>
+                <img src="images/health/p37.png" width="500" height="333">
+                <img src="images/health/p38.png" width="500" height="333">
+            </p>
+
+            <p id="p39p40a" class="container">
+                 <svg id="39" svg width="500" height="333" overflow="visible">
+                    <image id="39" href="images/health/p39.png" width="498" height="331"> </image>
+                    <rect id="rect39" class="pointer" x="70" y="160" width="250" height="100" fill="grey" fill-opacity="0"/>
+                    <!-- pop-up: education germany--> 
+                    <rect id="rect39pop" x="10" y="5" width="390" height="140" stroke="black"  fill="#ffffff" opacity="0.9" style="display:none"/>>
+                    <foreignObject id="39pop" x="10" y="5" width="390" height="140" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="popup">
+                          For example, a report of 2020 on the <b>integration  
+                            of aspects of gender sensitivity</b> of Human Medicine at Charité Berlin shows,
+                            gender-specific factors are integrated in various
+                            university teaching formats by a <b>maximum of 62%</b> of 
+                            <b>95 surveyed</b>.
+                        </div>
+                    </foreignObject>
+                    <!-- Closebutton -->
+                    <rect id="rect39popclose" class="pointer" x="1" y="1" width="498" height="331" fill="grey" fill-opacity="0" style="display:none"/>
+                    <!-- Infobutton: -->
+                    <image id="infobutton39" class="pointer" href="images/icons/infobutton.svg" x="470" y="303" width="30" height="30">
+                        <title>Click here to see all references</title>
+                    </image>
+                    <foreignObject id="sources39" x="0" y="333" width="460" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                           Seeland 2020, 36
+                        </div>
+                    </foreignObject>  
+                 </svg>
+                     <img src="images/health/p40a.png" width="500" height="333">
+            </p>
+
+        <p id="p40p39b" class="container"></p>
+            <img src="images/health/p39b.png" width="500" height="333">
+            <img src="images/health/p40.png" width="500" height="333">
+        </p>
+
+        <p id="p41" class="container"></p>
+             <svg id="41"svg width="1000" height="333" overflow="visible" >
+            <image id="41" href="images/health/p41.png" width="998" height="331"> </image>
+            <rect id="rect41" class="pointer" x="590" y="155" width="370" height="75" fill="grey" fill-opacity="0" />
+         
+            </svg>
+        </p>
+
+            <!-- 
+            <p id="phone_zoom" class="container">
+                <img id="phone_zoom" src="panel3.png" width="300" height="50">
+            </p> 
+            -->
+
+            <p id="sources-link">
+                Note: The data at hand originates from China, Germany, USA and Switzerland.
+                <br> If you want to take a closer look at the references of this comic, go to the <b><a class="page-link" href="Sources.html">reference page</a></b>
+            </p>
+            
+         <!-- end middle part of the page #####################################-->
+
+
+            <!--Navigation-->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="Intro.html">Intro</a></li>
+                    <li class="page-item"><a class="page-link" href="Crashtest.html">Crashtest</a></li>
+                    <!-- Navigation: "health" active -->
+                    <li class="page-item  active"><a class="page-link" href="Health.html">Health</a></li>
+                    <li class="page-item"><a class="page-link" href="Outro.html">Outro</a></li>
+                    <li class="page-item"><a class="page-link" href="Sources.html">References</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+    </div>
+
+    <!--footer with ggf. Sources, Names, Credits etc.-->
+    <div id="footer" class="row">
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+
+        <div id="footer" class="col-sm-8" style="background-color:grey;">
+            <p style="color:white;">
+                Data Comic designed by Mareike Link, Maria Zieglmeier & Josephine Euler
+            </p>
+        </div>
+
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

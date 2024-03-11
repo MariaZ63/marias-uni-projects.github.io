@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components_BookList/InputPanel.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components_BookList/InputPanel.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { SORT_OPTIONS } from "../utils/sortBooksBySortOption";
+import { useState } from 'react';
+
+/**
+ * Component for rendering star ratings and handling user interaction to update ratings.
+ * @param {object} props - Component props.
+ * @param {Function} props.onPanelClick - A function to call when submit or reset button is clicked.It takes two parameters: searchInput = { searchOption:"title", searchText:""} and searchOption.
+ * @returns {JSX.Element} - InputPanel component.
+*/
+const InputPanel = ({ onPanelClick }) => {
+
+    /**
+     * States to check the user inputs in the input panel
+     */
+    const [searchOption, setSearchOption] = useState("title");
+    const [searchText, setSearchText] = useState("");
+    const [sortOption, setSortOption] = useState(SORT_OPTIONS.NO_SORTING);
+
+    /**
+     * Handles click event on the submit button by sending
+     *  the user inputs back to parent component
+     */
+    const handlePanelSubmit = () => {
+        onPanelClick({ searchOption, searchText }, sortOption);
+    }
+
+    /**
+     *  Handles click event on the reset button by changing the input states to default values
+     * and sending them to parent component
+     */
+    const handlePanelReset = () => {
+        setSearchOption("title");
+        setSearchText("");
+        setSortOption(SORT_OPTIONS.NO_SORTING)
+        onPanelClick({ searchOption: "title", searchText: "" }, SORT_OPTIONS.NO_SORTING);
+    }
+
+    return (
+        &lt;div className="form-row">
+            &lt;div className="form-group col-sm-4">
+                &lt;input type="text" className="form-control" id="inputSearchText" placeholder="Search Text" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+            &lt;/div>
+            &lt;div className="form-group col-sm-3">
+                &lt;select id="inputSearchOption" className="form-control" value={searchOption} onChange={(e) => setSearchOption(e.target.value)}>
+                    &lt;option value="title">Title&lt;/option>
+                    &lt;option value="author">Author&lt;/option>
+                    &lt;option value="isbn">ISBN&lt;/option>
+                &lt;/select>
+            &lt;/div>
+            &lt;div className="form-group col-sm-3">
+                &lt;select id="sortOption" className="form-control" value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
+                    &lt;option value={SORT_OPTIONS.NO_SORTING}>No Sorting&lt;/option>
+                    &lt;option value={SORT_OPTIONS.TITLE_ASCENDING}>Title Ascending&lt;/option>
+                    &lt;option value={SORT_OPTIONS.TITLE_DESCENDING}>Title Descending&lt;/option>
+                    &lt;option value={SORT_OPTIONS.AUTHOR_ASCENDING}>Author Ascending&lt;/option>
+                    &lt;option value={SORT_OPTIONS.AUTHOR_DESCENDING}>Author Descending&lt;/option>
+                    &lt;option value={SORT_OPTIONS.STARS_ASCENDING}>Stars Ascending&lt;/option>
+                    &lt;option value={SORT_OPTIONS.STARS_DESCENDING}>Stars Descending&lt;/option>
+                &lt;/select>
+            &lt;/div>
+            &lt;div className="form-group col-6 col-sm-1">
+                &lt;button id="input-panel-submit" className="btn btn-primary btn-block" onClick={handlePanelSubmit}>&lt;i className="fa fa-check">&lt;/i>&lt;/button>
+            &lt;/div>
+            &lt;div className="form-group col-6 col-sm-1">
+                &lt;button id="input-panel-reset" className="btn btn-secondary btn-block" onClick={handlePanelReset}>X&lt;/button>
+            &lt;/div>
+        &lt;/div>
+    );
+}
+
+export default InputPanel;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="global.html#Book">Book</a></li><li><a href="BookManager.html">BookManager</a></li><li><a href="Store.html">Store</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddBook">AddBook</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookElement">BookElement</a></li><li><a href="global.html#BooksList">BooksList</a></li><li><a href="global.html#BooksTable">BooksTable</a></li><li><a href="global.html#ErrorPage">ErrorPage</a></li><li><a href="global.html#InputPanel">InputPanel</a></li><li><a href="global.html#NoBookDetail">NoBookDetail</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Root">Root</a></li><li><a href="global.html#SORT_OPTIONS">SORT_OPTIONS</a></li><li><a href="global.html#Spinner">Spinner</a></li><li><a href="global.html#Stars">Stars</a></li><li><a href="global.html#filterBooksBySearch">filterBooksBySearch</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#sortBooksAscending">sortBooksAscending</a></li><li><a href="global.html#sortBooksBySortOption">sortBooksBySortOption</a></li><li><a href="global.html#sortBooksDescending">sortBooksDescending</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Feb 14 2024 18:13:09 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

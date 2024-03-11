@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Top 15 Directors</title>
+    <script src="d3.min.js" defer></script>
+    <script src="movie_vis.js" defer></script>
+    <style>
+        .axis-label {
+          fill: #000;
+          font-size: 16px;
+          text-anchor: middle;
+        }
+        .small {
+            font-size: 12px;
+            font-family: sans-serif;
+        }
+        </style>
+</head>
+<body>
+	<p>Maria Zieglmeier</p>
+	<h1>Timeline Visualization of Movies as Events</h1>
+    <p>Graded Homework Assignment 02</p>
+    <p>Lecture <i> Grundlagen der Informationsvisualisierung</i> , University of Bamberg, summer semester 2023</p>
+
+    <div id="div_template">
+        <svg id="visSvg">
+            <g></g>
+        </svg>
+    </div>
+
+    <h2>Observed Insights:</h2>
+
+    <ul>
+        <li>Action movies and adventure movies appear to have a considerably bigger worldwide gross than other genres. For example, the most successful movie, Jurassic Park, has a worldwide gross of 923,067,947 US Dollars – and it is an action movie. These genres also are among the most frequent.</li>
+        <li>Production budgets of all movies are rather similar. They all have grown bigger over time: In the early years (roughly until 1990), they ranged from around 10 million US dollars up to 50 million US dollars. In later years (around 2010), most of the movies cost more than 50 million US dollars, many even over 100 million US dollars. This may be a byproduct of inflation. But it is also possible that the success of the directors has led them to be granted a bigger budget.</li>
+    </ul>
+
+    <h2>Comments or Explanations:</h2>
+    <p>
+        The colored circle represents the worldwide gross of a movie, while the inner white circle represents the production budget. Together, they give an impression of the profitability of the movie production. <br>
+        On hovering over a glyph, additional information about the selected movie is displayed. <br>
+        When you click on a circle, movies with the same genre are highlighted. You can then explore these movies and end the highlighting with another click.
+    </p>
+
+    <h2>References</h2>
+
+    <ul>
+        <li><a href="https://www.d3indepth.com/axes/">https://www.d3indepth.com/axes/</a></li>
+        <li><a href="https://www.d3indepth.com/scales/">https://www.d3indepth.com/scales/</a></li>
+        <li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element">https://developer.mozilla.org/en-US/docs/Web/SVG/Element</a></li>
+        <li><a href="https://d3-graph-gallery.com/graph/interactivity_tooltip.html">https://d3-graph-gallery.com/graph/interactivity_tooltip.html</a></li>
+        <li><a href="https://github.com/d3/d3-scale-chromatic">https://github.com/d3/d3-scale-chromatic</a></li>
+        <li><a href="https://d3-graph-gallery.com/graph/custom_legend.html">https://d3-graph-gallery.com/graph/custom_legend.html</a></li>
+    </ul>
+</body>
+</html>

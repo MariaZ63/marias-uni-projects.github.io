@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Exploring the Data Gap - A Journey to the Dark Matter of the Dataverse</title>
+    <link rel="stylesheet" href="bootstrap-5.3.0-dist/css/bootstrap.css">
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="script_outro.js"></script>
+
+    <!--Additional styling-->
+    <style>
+        div {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            padding-left: 50px;
+            font-size:20px;
+        }
+
+
+        title {
+            background-image: url(images/intro/title_intro.jpg);
+            background-size: cover;
+        }
+
+        
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .caption {
+            font-size: 20px;
+        }
+          
+    </style>
+
+</head>
+<body>
+
+
+    <!--Introduction Part-->
+    <div id="Storypart" class="row">
+
+        <!--upper part of the webpage-->
+        <!--right backround picture-->
+
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');"></div>
+
+        <!--middelpart of the webpage-->
+        <div class="col-sm-8" style="background-color:white;">
+            <!--title image: Mind the Data Gap-->
+            <p id="titleImage" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/intro/title_intro.png" alt="Mind the Data Gap Title Image" width="100%" height="100%" style="padding-bottom:20px;" />
+                </svg>
+            </p>
+
+            <!--Comic starts: -->
+            <p id="WhatNow" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="GenderDataGap" href="images/outro/WhatNow.PNG" width="100%" height="100%"></image>
+                </svg>
+            </p>
+
+            <p id="MindTheGap" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/outro/MindTheGap.PNG" width="100%" height="100%"></image>
+                </svg>
+            </p>
+
+            <p id="FlyingBack" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/outro/FlyingBackToTheSpaceStation.PNG" width="100%" height="100%"></image>
+                </svg>
+            </p>
+
+            <p id="Back" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/outro/BackAtTheSpaceStation.png" width="100%" height="100%"></image>
+                </svg>
+            </p>
+
+            <p id="SamTalking" class="container">
+
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/outro/SamAnnouncingInitiatives.PNG" width="100%" height="100%"></image>
+                </svg>
+
+            </p>
+
+            <p id="TalkWithAstronaut" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/outro/TalkWithAstronauts.png" width="100%" height="100%" />
+                    <image class="pointer" id="infobutton01" href="images/icons/infobutton.svg" x="970" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources01" x="150" y="333" width="1000" height="50" display="none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Klievink et al. 2017; Criado-Perez 2019; p. Giest & Samuels 2020
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+
+            <p id="TalkWithAstronaut" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/outro/TalkWithAstronauts2.png" width="100%" height="100%" />
+                    <image class="pointer" id="infobutton02" href="images/icons/infobutton.svg" x="970" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources02" x="333" y="333" width="1000" height="50" display="none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Termin & Roca 2016
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="ExploreButton">
+                <svg class="responsive-svg" viewBox="0 0 1000 175" overflow="visible">
+                    <image id="ExploreButton" href="images/outro/ExploreButton.png" x="25%" width="50%" height="100%" />
+                </svg>
+            </p>
+
+            <!--Needs to be adjusted to be responsive-->
+            <p id="Initiatives" class="container" style="padding-bottom: 20px;">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="Initiatives" href="images/outro/Initiatives.png" width="100%" height="100%" />
+                    <svg id="ini_svg" class="overlay" height="100%" width="100%" overflow="hidden" style="position: absolute">
+                        <circle id="ini_yellow" class="pointer" cx="23%" cy="63%" r="80" stroke="transparent" stroke-width="3" fill="black" fill-opacity="0.0" />
+                        <image id="Hand_Hover" href="images/outro/ini/hand.png" x="10%" y="70%" width="20%" height="20%" display="none" />
+
+                        <circle id="ini_blue" class="pointer" cx="86%" cy="65%" r="70" stroke="transparent" stroke-width="3" fill="black" fill-opacity="0.0" />
+                        <image id="UN_Hover" href="images/outro/ini/UN.png" x="70%" y="70%" width="25%" height="25%" display="none" />
+
+                        <circle id="ini_orange" class="pointer" cx="51%" cy="34%" r="75" stroke="transparent" stroke-width="3" fill="black" fill-opacity="0.0" />
+                        <image id="Female_Hover" href="images/outro/ini/data2x.png" x="55%" y="20%" width="22%" height="22%" display="none" />
+                    </svg>
+                </svg>
+            </p>
+
+            <p id="Hand" class="container" style="display:none">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="hand_small" href="images/outro/D.J.Hand_small.png" width="100%" height="100%" />
+                    <image class="pointer" id="infobutton03" href="images/icons/infobutton.svg" x="900" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources03" x="333" y="333" width="1000" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Hand 2020
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="Hand2" class="container" style="display:none">
+                <svg class="responsive-svg" viewBox="0 0 1000 666" overflow="visible">
+                    <image href="images/outro/D.J.Hand_big.png" width="100%" height="100%"></image>
+                    <image class="pointer" id="infobutton04" href="images/icons/infobutton.svg" x="900" y="636" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources04" x="333" y="666" width="1000" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Hand 2020
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="UN" class="container" style="display: none">
+                <svg class="responsive-svg" viewBox="0 0 1000 666" overflow="visible">
+                    <image href="images/outro/UN_big.png" width="100%" height="100%"></image>
+                    <image class="pointer" id="infobutton05" href="images/icons/infobutton.svg" x="900" y="636" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources05" x="333" y="666" width="1000" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            United Nations 2022
+                        </div>
+                    </foreignObject>
+                </svg>
+
+            </p>
+
+            <p id="AboutTheGenderGap" class="container" overflow="hidden" style="display: none">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="hand_small" href="images/outro/AboutTheFemaleDataGap.png" width="100%" height="100%" style="padding-bottom: 30px" />
+                    <image class="pointer" id="infobutton06" href="images/icons/infobutton.svg" x="900" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources06" x="200" y="333" width="1000" height="50" style="display:none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Criado-Perez 2019; https://data2x.org/about-us/
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="AboutTheGenderGap_data2x" class="container" overflow="hidden" style="display: none">
+                <img class="pointer" id="data2x" src="images/outro/data2x.PNG" title="https://data2x.org/" width="350" height="275" style=" box-shadow: 10px 10px 5px #888888;" />
+                <img class="pointer" id="data2xReport" src="images/outro/data2xReport.PNG" width="200" height="275" style="padding-left: 20px; box-shadow: 10px 10px 5px #888888;" title="https://data2x.org/resource-center/transforming-the-data-landscape-solutions-to-close-gender-data-gaps/" />
+            </p>
+
+            <!--Footer containing the link to our reference page:-->
+            <p id="footer">
+                If you want to take a closer look at the sources of this comic, go to the <b><a class="page-link" href="Sources.html">reference page</a></b>
+            </p>
+
+            <!--Navigation to other stories and the reference page-->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="Intro.html">Intro</a></li>
+                    <li class="page-item"><a class="page-link" href="Crashtest.html">Crashtest</a></li>
+                    <li class="page-item"><a class="page-link" href="Health.html">Health</a></li>
+                    <li class="page-item active"><a class="page-link" href="Outro.html">Outro</a></li>
+                    <li class="page-item"><a class="page-link" href="Sources.html">References</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--left background column-->
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+
+    </div>
+
+    <!--bottom part of the webpage-->
+
+    <div id="footer" class="row">
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+
+        <!--Copyright footer:-->
+        <div id="footer" class="col-sm-8" style="background-color:grey;">
+            <p style="color:white;">
+                Data Comic designed by Mareike Link, Maria Zieglmeier & Josephine Euler
+            </p>
+        </div>
+
+        <!--right background column-->
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+    </div>
+
+</body>
+</html>
