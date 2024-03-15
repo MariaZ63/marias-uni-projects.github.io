@@ -5,7 +5,7 @@ const descriptions = [
     "Long description": "",
     "Acquired skills": ["Modern JavaScript", "git", "Webpack", "Babel", "ESLint", "Node.js", "TDD", "vitest", "React.js"],
     name: "iBooks",
-    link: "iBooks/index.html",
+    link: "iBooks/dist/index.html",
     timeframe: "Winter semester 2023/24",
   },
   {
@@ -38,7 +38,7 @@ const descriptions = [
   {
     title: "Data Comic",
     "Short description": "Data Comic on the gender data gap. Created with two fellow students during an information visualization project.",
-    "Long description": "During an information visualization project, I created this comic with two fellow students. I was responsible for all the drawings, as well as the research, storytelling and implementation of the part about <a href='Data_Comic/Crashtest.html'>data gaps in crash testing</a>",
+    "Long description": "During an information visualization project, I created this comic with two fellow students. I was responsible for all the drawings, as well as the research, storytelling and implementation of the part about <a href='projects/Data_Comic/Crashtest.html'>data gaps in crash testing</a>",
     "Acquired skills": ["git", "Data storytelling", "jQuery", "CSS"],
     name: "datacomic",
     link: "Data_Comic/Intro.html",

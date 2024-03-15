@@ -1,6 +1,6 @@
 const Header = () => `
-    <div class="d-flex flex-wrap justify-content-end py-3 mb-4 border-bottom">
-      <div id="custom-header" className="col-12 m-3 text-left custom-header">
+    <header class="d-flex flex-wrap justify-content-end py-3 mb-4 border-bottom">
+      <div id="custom-header" class="col-12 m-3 text-left custom-header">
         <img
           id="custom-image" 
           class="responsive-img custom-image"
@@ -18,22 +18,22 @@ const Header = () => `
       <nav>
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link" href="/">
+            <a class="nav-link" href="">
               Home
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/#projects">
+            <a class="nav-link" href="#projects">
               Projects
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/#about">
+            <a class="nav-link" href="#about">
               About
             </a>
           </li>
         </ul>
       </nav>
-    </div>
+    </header>
   `;
 export default Header;

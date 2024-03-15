@@ -1,20 +1,20 @@
-import Header from "./components/Header";
-import Home from "./components/Home";
-import About from "./components/About";
-import Projects from "./components/Projects";
+import Header from "./components/Header.js";
+import Home from "./components/Home.js";
+import About from "./components/About.js";
+import Projects from "./components/Projects.js";
 
 class Router {
   root = document.querySelector("#root");
 
   renderInitialView = () => {
+    const { hash } = window.location;
     window.onload = () => {
       const header = document.createElement("header");
       header.innerHTML = Header();
       this.root.appendChild(header);
-      this.renderView("");
+      this.renderView(hash);
     };
     window.onhashchange = () => {
-      const { hash } = window.location;
       this.renderView(hash);
     };
   };

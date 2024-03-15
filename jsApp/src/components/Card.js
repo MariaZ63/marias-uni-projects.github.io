@@ -2,9 +2,9 @@ const Card = (param) => `
       <div class="col-lg-4 col-md-6 col-sm-12 card-div">
         <div class="card h-100">
           <img
-            href="./assets/${param.name}.png"
+            src="./assets/${param.name}.png"
             class="card-img-top"
-            alt="${param.image} image"
+            alt="${param.name} image"
           />
           <div class="card-body">
             <h5 class="card-title">${param.title}</h5>

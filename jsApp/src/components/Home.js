@@ -1,5 +1,5 @@
-import descriptions from "../descriptions";
-import Card from "./Card";
+import descriptions from "../descriptions.js";
+import Card from "./Card.js";
 
 const Home = () => `
       <div class="row">
@@ -17,11 +17,11 @@ const Home = () => `
             you can see a selection of works I did during the last semesters.
           </p>
         </div>
-        <div className="row">
+        <div class="row">
           ${descriptions.map((elem) => Card(elem)).join("")}
         </div>
-        <div className="row">
-          <div className="col-12 text-left">
+        <div class="row">
+          <div class="col-12 text-left">
             <p>
               You want to take a look at the source code? You can do so in my
               <a href="https://github.com/MariaZ63/marias-uni-projects.github.io">
