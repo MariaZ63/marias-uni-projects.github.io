@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Exploring the Data Gap - A Journey to the Dark Matter of the Dataverse</title>
+    <link rel="stylesheet" href="bootstrap-5.3.0-dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="csshake.css"> <!--For the rocket start in line 177-->
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="script_intro.js"></script>
+
+    <!--Additional styling-->
+    <style>
+        div {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            padding-top: 10px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            padding-left: 50px;
+            font-size: 20px
+        }
+
+        title {
+            background-image: url(images/intro/title_intro.jpg);
+            background-size: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .caption {
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+<body>
+
+
+    <!--Introduction Part-->
+    <div id="Storypart" class="row">
+
+        <!--upper part of the webpage-->
+
+        <!--right backround picture-->
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');"></div>
+        
+        <!--middelpart of the webpage-->
+        <div class="col-sm-8" style="background-color:white">
+            <!--title image: Mind the Data Gap-->
+            <p id="titleImage" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/intro/title_intro.png" alt="Mind the Data Gap Title Image" width="100%" height="100%" style="padding-bottom:20px;" />
+                </svg>
+            </p>
+
+            <!--Comic starts: -->
+            <p id="row01" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie1.PNG" width="100%" height="100%" />
+
+                    <!--Implementation of the infobuttons including the references: same implementatoin for every panel containing sources. -->
+                    <image class="pointer" id="infobutton01" href="images/icons/infobutton.svg" x="900" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources01" x="333" y="333" width="1000" height="50" display="none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            <!--Reference:-->
+                            Giest & Samuels 2020, p.559
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="row02" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie2.PNG" width="100%" height="100%" />
+                    <image class="pointer" id="infobutton02" href="images/icons/infobutton.svg" x="900" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources02" x="333" y="333" width="1000" height="50" display="none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Giest & Samuels 2020, p.563
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="row03" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie3.PNG" width="100%" height="100%" />
+
+                </svg>
+            </p>
+
+            <p id="row04" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie4.PNG" width="100%" height="100%" />
+                </svg>
+            </p>
+
+            <p id="row05" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie5.PNG" width="100%" height="100%" />
+                </svg>
+            </p>
+
+            <p id="row05_piechart" class="container">
+                <svg class="responsive-svg" viewBox="0 0 420 200" overflow="visible">
+                    <image id="piechart" href="images/intro/introduction/Piechart.png" x="10%" y="10%" width="80%" height="80%" transform="translate(-25%, -50%)" />
+                </svg>
+            </p>
+
+            <p id="row06" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie6.PNG" width="100%" height="100%" />
+                    <image class="pointer" id="infobutton03" href="images/icons/infobutton.svg" x="900" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources03" x="333" y="333" width="1000" height="50" display="none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            https://science.nasa.gov; Last checked: 16.01.23
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="row06_oneToSix" class="container">
+                <svg class="responsive-svg" viewBox="0 0 420 200" overflow="visible">
+                    <image id="OneToSix" href="images/intro/introduction/OnetoSix.png" x="10%" y="10%" width="80%" height="80%" transform="translate(-25%, -50%)" />
+                </svg>
+            </p>
+
+            <p id="row07" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie7.PNG" width="100%" height="100%" />
+                    <image class="pointer" id="infobutton04" href="images/icons/infobutton.svg" x="900" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources04" x="333" y="333" width="1000" height="50" display="none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Hand p.5
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+
+            <p id="row08" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introduction" href="images/intro/introduction/Folie8.PNG" width="100%" height="100%" />
+                </svg>
+            </p>
+
+            <p id="introductionSam" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="introSam" href="images/intro/Introduction_Sam/Folie1.PNG" x="50%" width="50%" height="333" />
+                    <image id="introSam2" href="images/intro/Introduction_Sam/Folie2.PNG" width="50%" height="333" />
+                </svg>
+            </p>
+
+            <p id="start_button" class="container">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image class="pointer" id="start_button" href="images/intro/startTheRocketButton.png" x="25%" width="50%" height="50%"/>
+                </svg>
+                
+            </p>
+            
+            <!--shaking rocket implemented as div-->
+            <div id="shakingSpaceShuttle" class="shake-horizontal" style="display:none">
+                   <img id="spaceShuttle" src="images/intro/spaceShuttle.png" width="420" height="333">
+            </div>
+
+            <p id="flyingToTheSpaceStation" class="container" style="display:none">
+                <svg class="responsive-svg" viewBox="0 0 1000 333">
+                    <image href="images/intro/flyingToTheSpaceStation.PNG" width="100%" height="100%" />
+                </svg>
+            </p>
+
+            <p id="welcomeToTheSpaceStation" class="container" style="display:none">
+                <svg class="responsive-svg" viewBox="0 0 1000 333">
+                    <image href="images/intro/welcomeToTheSpaceStation.png" width="100%" height="100%" />
+                </svg>
+            </p>
+
+            <p id="atTheSpaceStation" class="container" style="display:none">
+                <svg class="responsive-svg" viewBox="0 0 1000 333">
+                    <image href="images/intro/spaceStationText.png" width="100%" height="100%" />
+                </svg>
+            </p>
+
+            <p id="IntroDataGaps" class="container" style="display:none">
+
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="GenderDataGap" href="images/intro/GenderDataGap.png" width="100%" height="100%"></image>
+                    <image class="pointer" id="infobutton05" href="images/icons/infobutton.svg" x="900" y="303" width="30" height="30"><title>Click here to see all references</title></image>
+                    <foreignObject id="sources05" x="333" y="333" width="1000" height="50" display="none">
+                        <div xmlns="http://www.w3.org/1999/xhtml" class="caption">
+                            Termin & Roca 2016, p. 264
+                        </div>
+                    </foreignObject>
+                </svg>
+            </p>
+
+            <p id="letsFindOut" class="container" style="display:none;position:relative;">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image id="letsfindout" href="images/intro/letsFindOutButton.png" width="100%" height="100%"></image>
+                </svg>
+            </p>
+
+            <p id="samMeetsCharlie" class="container" style="display:none">
+                <svg class="responsive-svg" viewBox="0 0 1000 333" overflow="visible">
+                    <image href="images/intro/samMeetsCharlie.PNG" width="100%" height="100%"></image>
+                </svg>
+            </p>
+
+            <p id="samGoesWithCharlie" class="container" style="display:none;position:relative;">
+                <svg class="responsive-svg" viewBox="0 0 1000 333">
+                    <image id="samGoesWithCharlie_image" href="images/intro/samGoesWithCharlie.png" width="100%" height="100%"></image>
+                    <svg id="samGoesWithCharlie_overlay" class="overlay" overflow="visible" style="position:absolute">
+                        <rect class="pointer" id="rectangle01" x="67%" y="60%" width="27%" height="30%" stroke="transparent" stroke-width="3" fill="black" fill-opacity="0.0" />
+                    </svg>
+                </svg>
+            </p>
+
+            <!--Footer containing the link to our reference page:-->
+            <p id="footer">
+                Note: If you want to take a closer look at the sources of this comic, go to the <b><a class="page-link" href="Sources.html">reference page</a></b>
+            </p>
+
+            <!--Navigation to the other stories and the reference page-->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item active"><a class="page-link" href="Intro.html">Intro</a></li>
+                    <li class="page-item"><a class="page-link" href="Crashtest.html">Crashtest</a></li>
+                    <li class="page-item"><a class="page-link" href="Health.html">Health</a></li>
+                    <li class="page-item"><a class="page-link" href="Outro.html">Outro</a></li>
+                    <li class="page-item"><a class="page-link" href="Sources.html">References</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--left background column-->
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+
+    </div>
+    
+    <!--bottom part of the webpage-->
+
+    <div id="footer" class="row">
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+
+        <!--Copyright footer:-->
+        <div id="footer" class="col-sm-8" style="background-color:grey;">
+            <p style="color:white;">
+                Data Comic designed by Mareike Link, Maria Zieglmeier & Josephine Euler
+            </p>
+        </div>
+
+        <!--right background column-->
+        <div class="col-sm-2" style="background-image: url('backgroundimage_space.jpg');">
+        </div>
+    </div>
+
+</body>
+</html >
