@@ -18,17 +18,17 @@ const Header = () => `
       <nav>
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a id="homeNav" class="nav-link" href="">
               Home
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#projects">
+            <a id="projectsNav" class="nav-link" href="#projects">
               Projects
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about">
+            <a id="aboutNav" class="nav-link" href="#about">
               About
             </a>
           </li>
