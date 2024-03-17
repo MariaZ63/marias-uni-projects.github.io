@@ -1,12 +1,21 @@
 const descriptions = [
   {
-    title: "Book Management Application",
+    title: "React Book Management Application",
     "Short description": "Advanced web development project with a focus on tooling and frameworks. React app created with in a group of five.",
     "Long description": "",
     "Acquired skills": ["Modern JavaScript", "git", "Webpack", "Babel", "ESLint", "Node.js", "TDD", "vitest", "React.js"],
     name: "iBooks",
     link: "iBooks/dist/index.html",
     timeframe: "Winter semester 2023/24",
+  },
+  {
+    title: "Svelte LogBook",
+    "Short description": "Single page application that presents a logbook for space travelers. The entries are stored in the local storage of the browser.",
+    "Long description": "",
+    "Acquired skills": ["Svelte", "git", "localstorage", "JavaScript", "Bootstrap"],
+    name: "LogBook",
+    link: "LogBook/dist/index.html",
+    timeframe: "Summer semester 2023",
   },
   {
     title: "Single Page Application",
