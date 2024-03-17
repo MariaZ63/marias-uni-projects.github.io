@@ -26,13 +26,13 @@ import NoBookDetail from "./routes/NoBookDetail.jsx";
  */
 const router = createBrowserRouter([
   {
-    path: "/marias-uni-projects.github.io/projects/iBooks/dist/index.html",
+    path: "/marias-uni-projects.github.io/src/projects/iBooks/dist/index.html",
     element: <Root />,
     errorElement: <ErrorPage />,
 
     children: [
       {
-        path: "/marias-uni-projects.github.io/projects/iBooks/dist/index.html",
+        path: "/marias-uni-projects.github.io/src/projects/iBooks/dist/index.html",
         element: <Navigate to="addBooks" replace={true} />,
       },
       {
