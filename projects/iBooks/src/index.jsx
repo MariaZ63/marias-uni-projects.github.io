@@ -20,19 +20,22 @@ import NoBookDetail from "./routes/NoBookDetail.jsx";
  * React entry component with router specification
  */
 
+const route = window.location.pathname;
+console.log(window.location.pathname);
+
 /**
  * Array of Route-Objects with nested routes on the 'children'
  * @type {object[]}
  */
 const router = createBrowserRouter([
   {
-    path: "/marias-uni-projects.github.io/src/projects/iBooks/dist/index.html",
+    path: route,
     element: <Root />,
     errorElement: <ErrorPage />,
 
     children: [
       {
-        path: "/marias-uni-projects.github.io/src/projects/iBooks/dist/index.html",
+        path: route,
         element: <Navigate to="addBooks" replace={true} />,
       },
       {
