@@ -23,7 +23,9 @@ const BookElement = ({ book, onChange }) => {
    */
   const handleDetail = () => {
     const isbn = book.isbn;
-    return navigate(`/details/${isbn}`, { state: { key: book } });
+    const path = window.location.pathname;
+    const modifiedPath = path.split('/').slice(0, -1).join('/');
+    return navigate(`${modifiedPath}/details/${isbn}`, { state: { key: book } });
   };
 
   /**
