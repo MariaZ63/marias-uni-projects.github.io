@@ -7,7 +7,7 @@ const Card = (param) => `
             alt="${param.name} image"
           />
           <div class="card-body">
-            <h5 class="card-title">${param.title}</h5>
+            <h5 class="card-title"><b>${param.title}</b></h5>
             <p class="card-text">${param["Short description"]}</p>
             <a href="#projects/#${param.name}" class="btn btn-primary">Details</a>
           </div>

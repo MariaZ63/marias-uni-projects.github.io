@@ -1,8 +1,16 @@
+@font-face {
+  font-family: "YourCustomFont";
+  src: url("./Maryfont-Regular.otf") format("otf");
+  src: url("./Maryfont-Regular.woff") format("woff");
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
 body {
+  font-size: 20px;
+  font-family: "YourCustomFont", sans-serif;
   margin-bottom: 60px; /* Height of the footer */
 }
 .footer {
