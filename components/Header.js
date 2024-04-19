@@ -9,7 +9,7 @@ const Header = () => `
           alt="Headshot of Maria"
         />
         <h1 id="header-text">MARIA ZIEGLMEIER</h1>
-        <h3>UNI-PROJECTS</h3>
+        <h3>Portfolio</h3>
         <p>
           Portfolio of my web development projects <br /> Created at University
           of Bamberg
