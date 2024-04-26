@@ -1,5 +1,14 @@
 const descriptions = [
   {
+    title: "Master Thesis project",
+    "Short description": "Prototype of the data comic I am currently implementing for my master thesis",
+    "Long description": "",
+    "Acquired skills": [],
+    name: "data-comic",
+    link: "data-comic/dist/index.html",
+    timeframe: "Summer semester 2024",
+  },
+  {
     title: "React Book Management Application",
     "Short description": "Advanced web development project with a focus on tooling and frameworks. React app created with in a group of five.",
     "Long description": "",
