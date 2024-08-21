@@ -1,8 +1,17 @@
 const descriptions = [
   {
-    title: "Master Thesis project",
-    "Short description": "Prototype of the data comic I am currently implementing for my master thesis",
-    "Long description": "",
+    title: "Master Thesis Project",
+    "Short description": "Personalized data comic implemented as a part of my master thesis",
+    "Long description": "Personalized data comic implemented as a part of my master thesis",
+    "Acquired skills": ["Modern JavaScript", "git", "Node.js", "TDD", "React.js", "d3.js"],
+    name: "master-project",
+    link: "master-project/dist/index.html",
+    timeframe: "Summer semester 2024",
+  },
+  {
+    title: "Master Thesis Proposal",
+    "Short description": "Prototype of the data comic I proposed for my master thesis",
+    "Long description": "Prototype of the data comic I proposed for my master thesis",
     "Acquired skills": [],
     name: "data-comic",
     link: "data-comic/dist/index.html",
@@ -11,7 +20,7 @@ const descriptions = [
   {
     title: "React Book Management Application",
     "Short description": "Advanced web development project with a focus on tooling and frameworks. React app created with in a group of five.",
-    "Long description": "",
+    "Long description": "Advanced web development project with a focus on tooling and frameworks. React app created with in a group of five.",
     "Acquired skills": ["Modern JavaScript", "git", "Webpack", "Babel", "ESLint", "Node.js", "TDD", "vitest", "React.js"],
     name: "iBooks",
     link: "iBooks/dist/index.html",
@@ -20,7 +29,7 @@ const descriptions = [
   {
     title: "Svelte LogBook",
     "Short description": "Single page application that presents a logbook for space travelers. The entries are stored in the local storage of the browser.",
-    "Long description": "",
+    "Long description": "Single page application that presents a logbook for space travelers. The entries are stored in the local storage of the browser.",
     "Acquired skills": ["Svelte", "git", "localstorage", "JavaScript", "Bootstrap"],
     name: "LogBook",
     link: "LogBook/dist/index.html",

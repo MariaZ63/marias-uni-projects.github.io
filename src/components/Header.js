@@ -5,7 +5,7 @@ const Header = () => `
           id="custom-image" 
           class="responsive-img custom-image"
           height="200px"
-          src="./assets/Zieglmeier.png"
+          src="./assets/Zieglmeier.webp"
           alt="Headshot of Maria"
         />
         <h1 id="header-text">MARIA ZIEGLMEIER</h1>
