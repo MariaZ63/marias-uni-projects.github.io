@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "YourCustomFont";
+  src: url("../assets/HalfTermSchoolsOut-V4q5l.woff") format("woff");
+}
+body {
+  font-size: 20px;
+  font-family: "YourCustomFont", sans-serif;
+  background-color: #9ad2c9;
+  hyphens: auto;
+}
+#custom-header {
+  background-color: #F0AA36 ;
+  border-radius: 15px;
+  color: #002e5f;
+  font-weight: bold;
+}
+
+#header-text {
+  padding-top: 10px;
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.row {
+  padding-left: 20px;
+  /* padding-right: 40px; */
+}
+
+.meta-comic-panel {
+  border: 2px solid black;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.comic-panel {
+  border: 2px solid black;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+}
+
+.comic-panel img, .comic-panel .comic-panel svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.comic-text {
+  position: absolute;
+  background-color: white;
+  color: black;
+  padding: 4px;
+}
+
+.top-left {
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  left: 0px;
+  top: 0px;
+}
+
+.top-right {
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  top: 0px;
+  right: 0px;
+}
+
+.bottom-left {
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  bottom: 0px;
+  left: 0px;
+}
+
+.bottom-right {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  bottom: 0px;
+  right: 0px;
+}
+
+.loader {
+  width: 60px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+    20%{background-position:0%   0%, 50%  50%,100%  50%}
+    40%{background-position:0% 100%, 50%   0%,100%  50%}
+    60%{background-position:0%  50%, 50% 100%,100%   0%}
+    80%{background-position:0%  50%, 50%  50%,100% 100%}
+}
+
