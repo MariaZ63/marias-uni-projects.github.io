@@ -16,22 +16,17 @@ const Home = () => `
             I particularly enjoy web development and data visualization. Below,
             you can see a selection of works I did during the last semesters.
           </p>
-        </div>
-        <div class="row">
-          ${descriptions.map((elem) => Card(elem)).join("")}
-        </div>
-        <div class="row">
-          <div class="col-12 text-left">
-            <p>
+          <p>
               You want to take a look at the source code? You can do so in my
               <a href="https://github.com/MariaZ63/marias-uni-projects.github.io">
                 GitHub repository
               </a>
               .
             </p>
-          </div>
         </div>
-      </div>
+        <div class="row">
+          ${descriptions.map((elem) => Card(elem)).join("")}
+        </div>
     `;
 
 export default Home;

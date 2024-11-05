@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/intro/FictionalIntro.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/intro/FictionalIntro.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useState } from "react";
+import CharacterImage from "../../assets/images/character_book.png";
+import CharacterImageWithCat from "../../assets/images/character_cat_2.png";
+import RainImage from "../../assets/images/rain.jpg";
+import LightningImage from "../../assets/images/lightning.jpg";
+import HouseImage from "../../assets/images/house.jpg";
+import LibraryImage from "../../assets/images/library.jpg";
+import Welcome from "./Welcome";
+
+/**
+ * FictionalIntro component serves as the introduction to a fictional narrative,
+ * inviting users to interact by providing their name before progressing to the next panel.
+ *
+ * @param {Object} props - The component props.
+ * @param {function} props.setContent - Function to set content visibility in the parent component.
+ * @returns {JSX.Element} The rendered FictionalIntro component.
+ */
+
+const FictionalIntro = ({ setContent }) => {
+  const [name, setName] = useState(""); // State for form entry
+  const [nextPanel, setNextPanel] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setNextPanel(true);
+  };
+
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
+
+  return (
+    &lt;>
+      &lt;div className="row">
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+            &lt;svg
+              viewBox="0 0 250 250"
+              width="250"
+              height="250"
+              overflow="visible"
+            >
+              &lt;image href={RainImage} width="100%">&lt;/image>
+            &lt;/svg>
+
+            &lt;div className="comic-text top-left">
+              Somewhere, on a rainy summer day ...
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+          &lt;svg
+              viewBox="0 0 250 250"
+              width="250"
+              height="250"
+              overflow="visible"
+            >
+              &lt;image href={LightningImage} width="100%">&lt;/image>
+            &lt;/svg>
+
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel"
+          >
+            &lt;svg
+              viewBox="0 0 350 250"
+              width="350"
+              height="250"
+              overflow="visible"
+            >
+              &lt;image href={HouseImage} width="100%">&lt;/image>
+            &lt;/svg>
+
+
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+          &lt;svg
+              viewBox="0 0 250 250"
+              width="250"
+              height="250"
+              overflow="visible"
+            >
+              &lt;image href={LibraryImage} width="100%">&lt;/image>
+            &lt;/svg>
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+            &lt;svg
+              viewBox="0 0 300 300"
+              width="300"
+              height="300"
+              overflow="visible"
+            >
+              &lt;image
+                href={CharacterImage}
+                width="100%"
+                height="300px"
+                x="-50"
+                y="75"
+              />
+              &lt;foreignObject x="120" y="35" width="160" height="200">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;div className="bubble">Hello! I didn't see you there.&lt;/div>
+                &lt;/div>
+              &lt;/foreignObject>
+            &lt;/svg>
+          &lt;/div>
+        &lt;/div>
+
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+            &lt;svg
+              viewBox="0 0 400 300"
+              width="400"
+              height="300"
+              overflow="visible"
+            >
+              &lt;image
+                href={CharacterImageWithCat}
+                width="100%"
+                height="300px"
+                x="-100"
+                y="75"
+              />
+              &lt;foreignObject x="150" y="35" width="170" height="150">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;div className="bubble">
+                    I'm Rose and this is Archie. What&amp;apos;s your name?
+                  &lt;/div>
+                &lt;/div>
+              &lt;/foreignObject>
+              &lt;foreignObject x="150" y="150" width="100" height="250">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  {!nextPanel &amp;&amp; (
+                    &lt;form onSubmit={handleSubmit} style={{ padding: "5px" }}>
+                      &lt;input
+                        type="text"
+                        placeholder="Your name"
+                        className="form-control m-1"
+                        value={name}
+                        onChange={handleChange}
+                      />
+                      &lt;button type="submit" className="btn btn-primary m-1">
+                        Submit
+                      &lt;/button>
+                    &lt;/form>
+                  )}
+                &lt;/div>
+              &lt;/foreignObject>
+            &lt;/svg>
+          &lt;/div>
+        &lt;/div>
+
+        {nextPanel &amp;&amp; &lt;Welcome data={name} setContent={setContent} />}
+      &lt;/div>
+    &lt;/>
+  );
+};
+
+export default FictionalIntro;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

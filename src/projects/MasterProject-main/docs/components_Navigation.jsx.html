@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Navigation.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Navigation.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useData } from "../DataProvider";
+import CharacterStanding from "../assets/images/character_standing.png";
+import CatImage from "../assets/images/cat_playing.png";
+import CatImage_1 from "../assets/images/cat_resting.png";
+import book_BackToTheFuture from "../assets/images/book_BackToTheFuture.png";
+import book_PublishingPatterns from "../assets/images/book_PublishingPatterns.png";
+import book_ReadAroundTheWorld from "../assets/images/book_ReadAroundTheWorld.png";
+import book_TaleOfTime from "../assets/images/book_TaleOfTime.png";
+import { useState } from "react";
+
+/**
+ * Navigation component for selecting books and displaying related content.
+ *
+ * @param {Object} props - The props for the Navigation component.
+ * @param {number} props.index - The current chapter index.
+ * @param {Array&lt;string>} props.config - An array of components currently configured.
+ * @param {Function} props.setConfig - Function to update the configured components.
+ * @param {Function} props.setShowQuestion - Function to control the visibility of the question feature.
+ *
+ * @returns {JSX.Element} The rendered Navigation component.
+ */
+const Navigation = ({ index, config, setConfig, setShowQuestion }) => {
+  const { apiResponse } = useData();
+  const [visibility, setVisibility] = useState(true);
+
+  /**
+   * Adds a component to the configuration if not already included.
+   *
+   * @param {string} componentName - The name of the component to add.
+   */
+  const addComponent = (componentName) => {
+    if (!config.includes(componentName)) {
+      setConfig([...config, componentName]);
+      setVisibility(false);
+    }
+  };
+
+  /**
+   * Renders the initial navigation based on chapter count.
+   *
+   * @param {Object} props - The props for the initial navigation.
+   * @param {Object} props.apiResponse - The API response containing assessment information.
+   * @param {number} props.chapterCount - The count of chapters explored.
+   * @returns {JSX.Element|null} The rendered initial navigation or null if no content is to be displayed.
+   */
+  const InitialNav = ({ apiResponse, chapterCount }) => {
+    if ((apiResponse &amp;&amp; chapterCount === 0) || chapterCount === 4) {
+      return (
+        &lt;>
+          &lt;div className="col-md-auto">
+            &lt;div className="comic-panel">
+              &lt;svg width="470" height="400">
+                &lt;image
+                  href={CharacterStanding}
+                  width="100%"
+                  height="340px"
+                  x="-190"
+                  y="65"
+                />
+                &lt;image
+                  href={CatImage}
+                  width="100%"
+                  height="270px"
+                  x="130"
+                  y="210"
+                />
+                &lt;foreignObject x="105" y="15" width="430" height="400">
+                  &lt;div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    &lt;div className="bubble">
+                      {chapterCount === 0 &amp;&amp; (
+                        &lt;>
+                          {apiResponse.assessment} &lt;br />
+                          {visibility &amp;&amp; (
+                            &lt;>
+                              But let's take a closer look.&amp;nbsp;
+                              &lt;b>
+                                Select one of the books to explore different
+                                aspects of your reading data.
+                              &lt;/b>
+                            &lt;/>
+                          )}
+                        &lt;/>
+                      )}
+                      {chapterCount === 4 &amp;&amp; (
+                        &lt;>
+                          &lt;b>
+                            Congrats, you explored all books on your reading
+                            data!
+                          &lt;/b>
+                          &lt;br />
+                          {visibility &amp;&amp; (
+                            &lt;>
+                              Click the button to finish.
+                              &lt;br />
+                              &lt;div>
+                                &lt;button
+                                  className="btn btn-primary m-1"
+                                  onClick={() => {
+                                    setVisibility(false);
+                                    setShowQuestion(true);
+                                    setTimeout(() => {
+                                      const element = document.getElementById("questionFeature");
+                                      if (element) {
+                                        element.scrollIntoView({ behavior: "smooth" });
+                                      }
+                                    }, 0);
+                                  }}
+                                >
+                                  Finish
+                                &lt;/button>
+                              &lt;/div>
+                            &lt;/>
+                          )}
+                        &lt;/>
+                      )}
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/foreignObject>
+              &lt;/svg>
+            &lt;/div>
+          &lt;/div>
+        &lt;/>
+      );
+    }
+    if (chapterCount >= 1 &amp;&amp; chapterCount &lt;= 3 &amp;&amp; visibility) {
+      return (
+        &lt;>
+          &lt;div className="col-md-auto">
+            &lt;div className="comic-panel">
+              &lt;svg width="500" height="400">
+                &lt;image
+                  href={CharacterStanding}
+                  width="100%"
+                  height="340px"
+                  x="-190"
+                  y="65"
+                />
+                &lt;image
+                  href={CatImage_1}
+                  width="100%"
+                  height="270px"
+                  x="130"
+                  y="210"
+                />
+                &lt;foreignObject x="125" y="15" width="430" height="400">
+                  &lt;div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    &lt;div className="bubble">
+                      &lt;b>You explored {chapterCount} out of 4 books.&lt;/b> &lt;br />
+                      Select another book if you want to continue, or click the
+                      button to finish. &lt;br />
+                      &lt;button
+                        className="btn btn-primary m-1"
+                        onClick={() => {
+                          setVisibility(false);
+                          setShowQuestion(true);
+                        }}
+                      >
+                        Finish
+                      &lt;/button>
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/foreignObject>
+              &lt;/svg>
+            &lt;/div>
+          &lt;/div>
+        &lt;/>
+      );
+    }
+    return null;
+  };
+
+
+  /**
+   * Renders the book selection interface.
+   *
+   * @returns {JSX.Element} The rendered book selection interface.
+   */
+  const SelectBook = () => {
+    return (
+      &lt;div className="col-md-auto">
+        &lt;div className="comic-panel">
+          &lt;svg width="710" height="400">
+            &lt;g opacity={config.includes("BackToTheFuture") ? "50%" : "100%"}>
+              &lt;image
+                href={book_BackToTheFuture}
+                width="100%"
+                height="250px"
+                x="-270"
+                y="0"
+              />
+
+              &lt;foreignObject x="150" y="40" width="200" height="300">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;b>Back to the Future&lt;/b>
+                  &lt;br />
+                  Peek into your reading future with a look at your reading wishlist, and more recommendations.
+                &lt;/div>
+              &lt;/foreignObject>
+            &lt;/g>
+            &lt;g opacity={config.includes("PublishingPatterns") ? "50%" : "100%"}>
+              &lt;image
+                href={book_PublishingPatterns}
+                width="100%"
+                height="220px"
+                x="60"
+                y="15"
+              />
+
+              &lt;foreignObject x="480" y="40" width="200" height="300">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;b>Publishing Patterns&lt;/b>
+                  &lt;br />
+                  Uncover hidden trends in your reading history, like author gender, genres or publication years.
+                &lt;/div>
+              &lt;/foreignObject>
+            &lt;/g>
+            &lt;g opacity={config.includes("ReadAroundTheWorld") ? "50%" : "100%"}>
+              &lt;image
+                href={book_ReadAroundTheWorld}
+                width="100%"
+                height="240px"
+                x="-260"
+                y="195"
+              />
+
+              &lt;foreignObject x="155" y="230" width="190" height="300">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;b>Read around the World&lt;/b>
+                  &lt;br />
+                  Find out where your reading adventures have taken you and find new destinations.
+                &lt;/div>
+              &lt;/foreignObject>
+            &lt;/g>
+            &lt;g opacity={config.includes("TaleOfTime") ? "50%" : "100%"}>
+              &lt;image
+                href={book_TaleOfTime}
+                width="100%"
+                height="270px"
+                x="50"
+                y="175"
+              />
+
+              &lt;foreignObject x="480" y="230" width="200" height="300">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;b>Tale of Time&lt;/b>
+                  &lt;br />
+                  Travel through time with an interactive timeline of your reading adventures.
+                &lt;/div>
+              &lt;/foreignObject>
+            &lt;/g>
+            {/* Interactive elements for navigation */}
+            &lt;rect
+              opacity="0"
+              x="20"
+              y="40"
+              width="320"
+              height="150"
+              onClick={() => {
+                addComponent("BackToTheFuture");
+                setTimeout(() => {
+                  const element = document.getElementById("backToTheFuture");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }, 0);
+              }}
+              className="interactive"
+            >&lt;/rect>
+            &lt;rect
+              opacity="0"
+              x="350"
+              y="40"
+              width="340"
+              height="160"
+              onClick={() => {
+                addComponent("PublishingPatterns");
+                setTimeout(() => {
+                  const element = document.getElementById("publishingPatterns");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }, 0);
+              }}
+              className="interactive"
+            >&lt;/rect>
+            &lt;rect
+              opacity="0"
+              x="20"
+              y="230"
+              width="320"
+              height="150"
+              onClick={() => {
+                addComponent("ReadAroundTheWorld");
+                setTimeout(() => {
+                  const element = document.getElementById("readAroundTheWorld");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }, 0);
+              }}
+              className="interactive"
+            >&lt;/rect>
+            &lt;rect
+              opacity="0"
+              x="350"
+              y="230"
+              width="320"
+              height="150"
+              onClick={() => {
+                addComponent("TaleOfTime");
+                setTimeout(() => {
+                  const element = document.getElementById("taleOfTime");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }, 0);
+              }}
+              className="interactive"
+            >&lt;/rect>
+          &lt;/svg>
+        &lt;/div>
+      &lt;/div>
+    );
+  };
+
+  return (
+    &lt;>
+      &lt;div className="row" id="navigation">
+        &lt;InitialNav apiResponse={apiResponse} chapterCount={index} />
+
+        {visibility &amp;&amp; index &lt;= 3 &amp;&amp; &lt;SelectBook />}
+      &lt;/div>
+    &lt;/>
+  );
+};
+
+export default Navigation;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

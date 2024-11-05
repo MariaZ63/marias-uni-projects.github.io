@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/readAroundTheWorld/WorldMap.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/readAroundTheWorld/WorldMap.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useRef, useState } from "react";
+import * as d3 from "d3";
+import worldData from "../../assets/data/world.geo.json";
+import { filter } from "../../utils/filter";
+import { aggregateCountries } from "../../utils/aggregate";
+import WorldMapExplanation from "./WorldMapExplanation";
+import { useData } from "../../DataProvider";
+import CatImage from "../../assets/images/cat_pointing_up_2.png";
+import catImage2 from "../../assets/images/cat_standing.png";
+import BookStack from "../BookStack";
+import Tooltip from "../Tooltip";
+import BookRecommendation from "../BookRecommendation";
+import { recommendations } from "../../assets/data/countryRecommendations";
+import { apiRequest } from "../../utils/apiRequest";
+
+
+/**
+ * WorldMap component visualizes the number of books read by country on a world map.
+ * It displays interactive geographical regions that users can hover over or click
+ * to reveal details about books read from those countries. The map dynamically updates
+ * based on user interactions and data from the application.
+ *
+ * - Displays a world map using D3.js, where each country is colored based on the
+ *   number of books read from that country.
+ * - Shows a tooltip with the count of books when hovering over a country.
+ * - Provides detailed information and recommendations when a country is clicked.
+ * - Integrates with external data sources and utility functions to fetch and process
+ *   book data.
+ * 
+ * @returns {JSX.Element} The rendered WorldMap component.
+ */
+const WorldMap = () => {
+  const width = 580;
+  const height = 400;
+  const svgRef = useRef(null);
+  const [aggregatedData, setAggregatedData] = useState(null);
+  const [rec, setRec] = useState("");
+  const [country, setCountry] = useState("");
+  const [tooltipContent, setTooltipContent] = useState("");
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const { data } = useData();
+
+  // Fetch and process the data
+  useEffect(() => {
+    if (data) {
+      const readBooks = filter(data, "Read Status", "read");
+
+      const countryCount = aggregateCountries(readBooks, "Country");
+
+      setAggregatedData(countryCount);
+    }
+  }, [data]);
+
+  // Draw the map and apply colors based on aggregatedData
+  useEffect(() => {
+    if (!aggregatedData) return; // Do nothing if data is not available yet
+
+    const svg = d3.select(svgRef.current);
+
+    // Define the projection and path generator
+    const projection = d3.geoMercator().fitSize([width, height], worldData);
+
+    const path = d3.geoPath().projection(projection);
+
+    // Extract values excluding "unknown"
+    const values = Object.entries(aggregatedData)
+      .filter(([country]) => country !== "unknown")
+      .map(([_, count]) => count);
+
+    // Define a color scale based on the aggregated data
+    const colorScale = d3
+      .scaleQuantize()
+      .domain([1, d3.max(values)])
+      .range(d3.schemeYlGnBu[5]);
+
+    // Clear previous map paths (if any)
+    svg.selectAll("path").remove();
+
+    // Append the map to the SVG and color it based on aggregated data
+    svg
+      .selectAll("path")
+      .data(worldData.features)
+      .enter()
+      .append("path")
+      .attr("d", path)
+      .attr("fill", (d) => {
+        const countryName = d.properties.name;
+        const count = aggregatedData[countryName];
+        if (count) {
+          return colorScale(count);
+        }
+        return "#C0C0C0";
+      })
+      .attr("stroke", "#333")
+      .attr("class", "interactive")
+      .on("mouseover", (event, d) => {
+        const countryName = d.properties.name;
+        const count = aggregatedData[countryName] || 0;
+        setTooltipContent(
+          `${countryName}: ${count || 0} ${count === 1 ? "book" : "books"}`
+        );
+        setTooltipVisible(true);
+      })
+      .on("mousemove", (event) => {
+        setTooltipPosition({ x: event.pageX, y: event.pageY });
+      })
+      .on("mouseout", () => {
+        setTooltipVisible(false);
+      })
+      .on("click", async (event, d) => {
+        const countryName = d.properties.name;
+        const count = aggregatedData[countryName] || 0;
+        if (!count) {
+          setCountry("");
+          const countryRecommendation = recommendations.find(
+            (item) => item[countryName]
+          );
+
+          /* if (!countryRecommendation) {
+            setRec(
+              `I'm sorry, but I can't think of any book from ${countryName} to recommend.`
+            );
+          } else { */
+          /* const title = countryRecommendation[countryName]["Title"];
+            const author = countryRecommendation[countryName]["Authors"]; */
+          setRec("loading");
+          const message = `Give the reader a personalized recommendation for a book that is from the following country: ${countryName}. Don't use markup. Keep your answer brief in about 3 sentences. Start like this: "If you want to read a book from ..."`;
+          const recommendation = await apiRequest(message, data);
+          //countryRecommendation[countryName]["Recommendation"];
+
+          setRec(recommendation);
+          /* } */
+          return;
+        }
+        setRec("");
+        setCountry(countryName);
+      });
+
+    // Add a legend (optional but recommended)
+    /* const legendWidth = 200;
+    const legendHeight = 20;
+    const legendX = width - legendWidth - 20;
+    const legendY = height - legendHeight - 20;
+
+    const legend = svg
+      .append("g")
+      .attr("transform", `translate(${legendX}, ${legendY})`);
+
+    const legendScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(values)])
+      .range([0, legendWidth]);
+
+    legend
+      .selectAll("rect")
+      .data(
+        colorScale.range().map((color) => {
+          const [start, end] = colorScale.invertExtent(color);
+          return { color, start, end };
+        })
+      )
+      .enter()
+      .append("rect")
+      .attr("x", (d) => legendScale(d.start))
+      .attr("width", (d) => legendScale(d.end) - legendScale(d.start))
+      .attr("height", legendHeight)
+      .attr("fill", (d) => d.color);
+
+    legend
+      .append("text")
+      .attr("x", legendWidth)
+      .attr("y", legendHeight / 2)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text("Count"); */
+    // Add a legend (updated to include numbers)
+    const legendWidth = 200;
+    const legendHeight = 20;
+    const legendX = width - legendWidth - 20;
+    const legendY = height - legendHeight - 20;
+
+    const legend = svg
+      .append("g")
+      .attr("transform", `translate(${legendX}, ${legendY})`);
+
+    // Define the scale for the legend and the ticks (for numbers)
+    const legendScale = d3
+      .scaleLinear()
+      .domain(colorScale.domain()) // Use the same domain as the color scale
+      .range([0, legendWidth]);
+
+    // Add color blocks to the legend
+    legend
+      .selectAll("rect")
+      .data(
+        colorScale.range().map((color) => {
+          const [start, end] = colorScale.invertExtent(color);
+          return { color, start, end };
+        })
+      )
+      .enter()
+      .append("rect")
+      .attr("x", (d) => legendScale(d.start))
+      .attr("width", (d) => legendScale(d.end) - legendScale(d.start))
+      .attr("height", legendHeight)
+      .attr("fill", (d) => d.color);
+
+    // Add ticks (numbers) to the legend
+    const legendAxis = d3
+      .axisBottom(legendScale)
+      .tickSize(legendHeight)
+      .tickValues(colorScale.thresholds()); // Use the thresholds from the color scale
+
+    legend.append("g").call(legendAxis).select(".domain").remove(); // Remove the axis line
+  }, [aggregatedData, width, height]);
+
+  return (
+    &lt;>
+      &lt;div className="col-md-auto">
+        &lt;div className="comic-panel">
+          &lt;svg ref={svgRef} width={width} height={height}>
+            &lt;image
+              href={CatImage}
+              width="100%"
+              height="90px"
+              x="-260"
+              y="335"
+            />
+            &lt;foreignObject x="55" y="260" width="120" height="200">
+              &lt;div
+                xmlns="http://www.w3.org/1999/xhtml"
+                style={{ width: "100%", height: "100%", fontSize: "17px" }}
+              >
+                &lt;div className="bubble">
+                  Hover over a country or click on it for details.
+                &lt;/div>
+              &lt;/div>
+            &lt;/foreignObject>
+          &lt;/svg>
+          &lt;div className="comic-text top-right">
+            Overview of books read by country
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+
+      {rec &amp;&amp; &lt;BookRecommendation recommendation={rec} />}
+      {country &amp;&amp; &lt;BookStack property="Country" value={country} />}
+      {!(rec || country) &amp;&amp; (
+        &lt;div className="col-md-auto">
+          &lt;svg
+            viewBox="0 0 400 400"
+            width="400"
+            height="400"
+            overflow="visible"
+          >
+            &lt;image
+              href={catImage2}
+              width="100%"
+              height="350px"
+              x="-70"
+              y="150"
+            />
+            &lt;foreignObject x="100" y="75" width="300" height="300">
+              &lt;div
+                xmlns="http://www.w3.org/1999/xhtml"
+                style={{ width: "100%", height: "100%" }}
+              >
+                &lt;div className="bubble">
+                  I think Archie's gone out to chase raindrops again...
+                &lt;/div>
+              &lt;/div>
+            &lt;/foreignObject>
+          &lt;/svg>
+        &lt;/div>
+      )}
+      &lt;Tooltip
+        content={tooltipContent}
+        position={tooltipPosition}
+        isVisible={tooltipVisible}
+      />
+      {aggregatedData &amp;&amp; &lt;WorldMapExplanation data={aggregatedData} />}
+    &lt;/>
+  );
+};
+
+export default WorldMap;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

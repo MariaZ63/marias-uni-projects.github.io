@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/filter.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/filter.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Filters an array of objects based on a specified property and value.
+ *
+ * @param {Array&lt;Object>} data - Array of objects to be filtered.
+ * @param {string} property - The property name to filter by.
+ * @param {*} value - The value to match for the specified property.
+ * @returns {Array&lt;Object>} Array of objects where the specified property matches the given value.
+ */
+export const filter = (data, property, value) => {
+  return data.filter((d) => d[property] === value);
+};
+
+/**
+ * Filters an array of book objects based on the year they were read.
+ *
+ * @param {Array&lt;Object>} data - Array of book objects to filter.
+ * @param {number} year - The year to filter books by.
+ * @returns {Array&lt;Object>} Array of books that were read in the specified year.
+ */
+export const filterByYear = (data, year) => {
+  return data.filter(book => {
+    const dateRead = book["Date Read"];
+    if (dateRead) {
+      const readYear = new Date(dateRead).getFullYear();
+      return readYear === year;
+    }
+    return false;
+  });
+}
+
+/**
+ * Filters an array of book objects based on the specified country or countries of origin.
+ *
+ * @param {Array&lt;Object>} data - Array of book objects to filter.
+ * @param {string} country - The country to filter books by. Matches if the book's country list includes this country.
+ * @returns {Array&lt;Object>} Array of books that were read in or are associated with the specified country.
+ */
+export const filterByCountry = (data, country) => {
+  return data.filter((d) => {
+    const countries = d.Country ? d.Country.split(",").map(c => c.trim()) : [];
+    return countries.includes(country);
+  });
+};
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

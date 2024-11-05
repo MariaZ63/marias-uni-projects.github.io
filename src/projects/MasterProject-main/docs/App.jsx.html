@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: App.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: App.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Header from "./components/Header";
+import { DataProvider } from "./DataProvider";
+import { useState } from "react";
+import MainPart from "./components/MainPart";
+
+/**
+ * Main application component that handles dataset selection and renders data-based content.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered App component.
+ *
+ * @example
+ * &lt;App />
+ */
+const App = () => {
+  // State for the currently selected dataset
+  const [selectedDataset, setSelectedDataset] = useState(null); // Initially, no dataset selected
+  // State to track if a dataset has been selected, used to lock the menu
+  const [isDatasetSelected, setIsDatasetSelected] = useState(false); // To disable or hide the menu after selection
+
+  /**
+   * Handles the dataset selection change, updating the selected dataset
+   * and locking the selection menu.
+   *
+   * @function handleDatasetChange
+   * @param {Object} e - Event object from the change event.
+   */
+  const handleDatasetChange = (e) => {
+    setSelectedDataset(e.target.value); // Set the chosen dataset
+    setIsDatasetSelected(true); // Lock the selection, preventing changes
+  };
+
+  return (
+    &lt;>
+      &lt;Header />
+      &lt;div style={{ padding: "20px" }}>
+        {/* Dataset selection menu, hidden or disabled after selection */}
+        {!isDatasetSelected &amp;&amp; (
+          &lt;>
+            &lt;label htmlFor="dataset">Select Dataset: &lt;/label>
+            &lt;select
+              className="mx-2"
+              id="dataset"
+              value={selectedDataset || ""}
+              onChange={handleDatasetChange}
+            >
+              &lt;option value="" disabled>
+                -- Select a Dataset --
+              &lt;/option>
+              &lt;option value="dataset0">Dataset 0&lt;/option>
+              &lt;option value="dataset1">Dataset 1&lt;/option>
+              &lt;option value="dataset2">Dataset 2&lt;/option>
+              &lt;option value="dataset3">Dataset 3&lt;/option>
+              &lt;option value="dataset4">Dataset 4&lt;/option>
+              &lt;option value="dataset5">Dataset 5&lt;/option>
+              &lt;option value="dataset6">Dataset 6&lt;/option>
+            &lt;/select>
+          &lt;/>
+        )}
+      &lt;/div>
+
+      {/* Render content only after a dataset is selected */}
+      {isDatasetSelected &amp;&amp; selectedDataset &amp;&amp; (
+        &lt;DataProvider selectedDataset={selectedDataset}>
+          &lt;MainPart />
+        &lt;/DataProvider>
+      )}
+    &lt;/>
+  );
+};
+
+export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

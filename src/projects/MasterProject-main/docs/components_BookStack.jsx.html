@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/BookStack.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/BookStack.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useRef, useState } from "react";
+import { useData } from "../DataProvider";
+import * as d3 from "d3";
+import BookDetail from "./BookDetail";
+import { filter, filterByCountry } from "../utils/filter";
+import Tooltip from "./Tooltip";
+import catImage2 from "../assets/images/cat_resting.png";
+
+/**
+ * BookStack component renders a visual stack of books based on user-selected properties.
+ * It utilizes D3.js for creating the stack visualization and includes interactivity 
+ * for displaying book details and tooltips.
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} props.property - The property to filter the books by (e.g., "Country").
+ * @param {string} props.value - The value of the property to filter the books by.
+ * @returns {JSX.Element} The rendered BookStack component with visualizations and interactions.
+ */
+const BookStack = ({ property, value }) => {
+  const width = 80;
+  const height = 250;
+  const margin = { top: 50, right: 30, bottom: 50, left: 60 };
+  const svgRef = useRef(null);
+  const { data } = useData();
+  const [detail, setDetail] = useState(null);
+  const [tooltipContent, setTooltipContent] = useState("");
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      setDetail(null);
+      const readBooks = filter(data, "Read Status", "read");
+      if (property === "Country") {
+        const filteredBooks = filterByCountry(readBooks, value);
+        //(filteredBooks);
+        createStack(filteredBooks);
+      } else {
+        const filteredBooks = filter(readBooks, property, value);
+        createStack(filteredBooks);
+      }
+    }
+  }, [property, value]);
+
+  const createStack = (aggregatedData) => {
+    const oldSvg = d3.select(svgRef.current);
+    oldSvg.selectAll("*").remove();
+
+    const svg = oldSvg
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Y axis
+    const maxCount = aggregatedData.length;
+    const y = d3.scaleLinear().domain([0, maxCount]).range([height, 0]);
+    if (maxCount > 10) {
+      svg.append("g").call(d3.axisLeft(y));
+    } else {
+      svg.append("g").call(
+        d3
+          .axisLeft(y)
+          .ticks(maxCount) // Set number of ticks equal to max count
+          .tickFormat(d3.format("d")) // Format ticks as integers
+      );
+    }
+
+    // Color scale
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    const rects = svg
+      .selectAll("rect")
+      .data(aggregatedData)
+      .enter()
+      .append("rect")
+      .attr("x", 30) // Position based on index
+      .attr("y", (d) => y(aggregatedData.length - aggregatedData.indexOf(d))) // Reverse the y positioning for top-down
+      .attr("width", 45) // Width of each rectangle
+      .attr("height", height / aggregatedData.length) // Height of each rectangle
+      .attr("fill", (d, i) => color(i)) // Color based on index
+      .attr("class", "interactive")
+      .on("mouseover", (event, d) => {
+        setTooltipContent(`${d.Authors}: ${d.Title}`);
+        setTooltipVisible(true);
+      })
+      .on("mousemove", (event) => {
+        setTooltipPosition({ x: event.pageX, y: event.pageY });
+      })
+      .on("mouseout", () => {
+        setTooltipVisible(false);
+      })
+      .on("click", (event, d) => setDetail(d));
+  };
+
+  return (
+    &lt;>
+      &lt;div className="col-md-auto">
+        &lt;div className="comic-panel py-4">
+          &lt;svg
+            ref={svgRef}
+            width={width + margin.left + margin.right}
+            height={height + margin.top + margin.bottom}
+          >
+            {/* &lt;svg ref={svgRef} width={width} height={height}>&lt;/svg> */}
+          &lt;/svg>
+          &lt;div className="comic-text top-right">{value} stack&lt;/div>
+          &lt;div
+            className="comic-text bottom-right ms-2"
+            style={{ fontSize: "17px" }}
+          >
+            Click on a book to reveal a detail view!
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+
+      {detail ? (
+        &lt;BookDetail book={detail} setDetail={setDetail} />
+      ) : (
+        &lt;div className="col-md-auto">
+          &lt;svg
+            viewBox="0 0 400 400"
+            width="400"
+            height="400"
+            overflow="visible"
+          >
+            &lt;image
+              href={catImage2}
+              width="100%"
+              height="350px"
+              x="-70"
+              y="170"
+            />
+            &lt;foreignObject x="100" y="75" width="300" height="300">
+              &lt;div
+                xmlns="http://www.w3.org/1999/xhtml"
+                style={{ width: "100%", height: "100%" }}
+              >
+                &lt;div className="bubble">
+                  Archie, you little bugger! What are you up to?
+                &lt;/div>
+              &lt;/div>
+            &lt;/foreignObject>
+          &lt;/svg>
+        &lt;/div>
+      )}
+      &lt;Tooltip
+        content={tooltipContent}
+        position={tooltipPosition}
+        isVisible={tooltipVisible}
+      />
+    &lt;/>
+  );
+};
+export default BookStack;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

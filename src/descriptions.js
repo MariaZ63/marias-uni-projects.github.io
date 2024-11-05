@@ -1,14 +1,14 @@
 const descriptions = [
   {
     title: "Master Thesis Project",
-    "Short description": "Personalized data comic implemented as a part of my master thesis",
-    "Long description": "Personalized data comic implemented as a part of my master thesis",
-    "Acquired skills": ["Modern JavaScript", "git", "Node.js", "TDD", "React.js", "d3.js"],
+    "Short description": "Personalized data comic implemented as a part of my master thesis.",
+    "Long description": "In my master thesis, I focused on developing different methods for personalized data storytelling. This prototype thematizes the user's personal reading dataset, discussing trends in the individual data and giving personalized recommendations.",
+    "Acquired skills": ["Modern JavaScript", "git", "Node.js", "React", "d3.js", "OpenAI API"],
     name: "master-project",
     link: "master-project/dist/index.html",
     timeframe: "Summer semester 2024",
   },
-  {
+  /*{
     title: "Master Thesis Proposal",
     "Short description": "Prototype of the data comic I proposed for my master thesis",
     "Long description": "Prototype of the data comic I proposed for my master thesis",
@@ -16,12 +16,12 @@ const descriptions = [
     name: "data-comic",
     link: "data-comic/dist/index.html",
     timeframe: "Summer semester 2024",
-  },
+  },*/
   {
     title: "React Book Management Application",
     "Short description": "Advanced web development project with a focus on tooling and frameworks. React app created with in a group of five.",
-    "Long description": "Advanced web development project with a focus on tooling and frameworks. React app created with in a group of five.",
-    "Acquired skills": ["Modern JavaScript", "git", "Webpack", "Babel", "ESLint", "Node.js", "TDD", "vitest", "React.js"],
+    "Long description": "This project focused on getting to know the essentials of modern web development: Tools like Webpack, Babel and Eslint, Frameworks like React, agile development in teams and much more. Implemented in a group of five.",
+    "Acquired skills": ["Modern JavaScript", "git", "Webpack", "Babel", "ESLint", "Node.js", "TDD", "vitest", "React"],
     name: "iBooks",
     link: "iBooks/dist/index.html",
     timeframe: "Winter semester 2023/24",
@@ -29,7 +29,7 @@ const descriptions = [
   {
     title: "Svelte LogBook",
     "Short description": "Single page application that presents a logbook for space travelers. The entries are stored in the local storage of the browser.",
-    "Long description": "Single page application that presents a logbook for space travelers. The entries are stored in the local storage of the browser.",
+    "Long description": "The final assigment for the fictional GOTO-Mars project. This logbook application focuses on applying a component-based framework, in this case Svelte. ",
     "Acquired skills": ["Svelte", "git", "localstorage", "JavaScript", "Bootstrap"],
     name: "LogBook",
     link: "LogBook/dist/index.html",

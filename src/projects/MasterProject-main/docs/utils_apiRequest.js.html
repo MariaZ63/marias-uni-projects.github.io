@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/apiRequest.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/apiRequest.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { filter } from "./filter"; 
+import axios from "axios";
+
+const apiKey = import.meta.env.VITE_API_KEY;
+
+/**
+ * Transforms an array of book data objects into a formatted text summary.
+ *
+ * @param {Array&lt;Object>} data - Array of book objects, each containing book properties like Title, Authors, ISBN, and others.
+ * @returns {string} A formatted string with detailed information for each book in the input array.
+ */
+const transformToText = (data) => {
+    return data
+      .map((row) => {
+        return `Title: ${row.Title}
+                Authors: ${row.Authors}
+                Contributors: ${row.Contributors}
+                ISBN: ${row.ISBN}
+                Format: ${row.Format}
+                Read Status: ${row["Read Status"]}
+                Date Read: ${row["Date Read"]}
+                Star Rating: ${row["Star Rating"]}
+                Review: ${row.Review}
+                Owned: ${row.Owned}
+                Number of Pages: ${row["Number of Pages"]}
+                Year Published: ${row["Year Published"]}
+                Original Publication Year: ${row["Original Publication Year"]}
+                Average Rating: ${row["Average Rating"]}
+                Country: ${row.Country}
+                Gender: ${row.Gender}
+                Language: ${row.Language}\n`;
+      })
+      .join("\n");
+  };
+
+  /**
+ * Sends a formatted reading list summary and a message to the OpenAI API for processing.
+ *
+ * @async
+ * @param {string} message - The main prompt or question to send to the API.
+ * @param {Array&lt;Object>} data - Array of book data objects to filter and transform into text.
+ * @returns {Promise&lt;string>} The response from the OpenAI API.
+ */
+export const apiRequest = async (message, data) => {
+  try {
+
+    const readBooks = filter(data, "Read Status", "read");
+    const textData = transformToText(readBooks);
+
+    const result = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are part of a personalized interactive data story that treats the reader's reading data. You are the voice of the main character, which is a bookworm with a cat named Archie. Talk in a friendly, informal, personal tone as if you were talking to a friend. Relate to the reader by mentioning your own experiences (e.g., having read a book before).",
+          },
+          {
+            role: "user",
+            content: `${message}
+                      Here is a detailed summary of the user's reading list that serves as a basis for your reasoning:\n\n
+                      ${textData}`,
+          },
+        ],
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    //console.log(result.data.choices[0].message.content);
+    const res = result.data.choices[0].message.content;
+    return res;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

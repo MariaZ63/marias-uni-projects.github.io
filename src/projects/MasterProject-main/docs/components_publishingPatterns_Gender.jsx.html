@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/publishingPatterns/Gender.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/publishingPatterns/Gender.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useRef, useState } from "react";
+import * as d3 from "d3";
+import { useData } from "../../DataProvider";
+import { filter } from "../../utils/filter";
+import { aggregate } from "../../utils/aggregate";
+import CatImage from "../../assets/images/cat_pointing_up.png";
+import CatIamge2 from "../../assets/images/cat_belly_side.png";
+import CharacterImage from "../../assets/images/character_sitting.png";
+
+/**
+ * Gender component visualizes the distribution of books read by the user 
+ * based on the gender of the authors. It creates a pie chart representation 
+ * of the data using D3.js and includes additional visual elements for 
+ * enhanced storytelling.
+ *
+ * - Displays a pie chart showing the ratio of books by male, female, and non-binary authors.
+ * - Includes visual elements such as images of characters and informative bubbles.
+ * - Provides feedback on books that could not be assigned an author gender.
+ *
+ * @returns {JSX.Element} The rendered Gender component.
+ */
+
+const Gender = () => {
+  const width = 580;
+  const height = 400;
+  const svgRef = useRef(null);
+  const [aggregatedData, setAggregatedData] = useState(null);
+  const [unknown, setUnknown] = useState(0);
+  const { data, apiResponse } = useData();
+
+  // Fetch and process the data
+  useEffect(() => {
+    if (data) {
+      const readBooks = filter(data, "Read Status", "read");
+
+      const genderCount = aggregate(readBooks, "Gender");
+
+      let finalGenderCount = {
+        male: genderCount["male"] || 0,
+        female: genderCount["female"] || 0,
+        "non-binary": genderCount["non-binary"] || 0,
+      };
+
+      // Filter out zero values
+      finalGenderCount = Object.fromEntries(
+        Object.entries(finalGenderCount).filter(([key, value]) => value > 0)
+      );
+
+      const unknownGender =
+        readBooks.length -
+        (finalGenderCount["male"] +
+          finalGenderCount["female"] +
+          finalGenderCount["non-binary"] || 0);
+
+      if (readBooks.length === unknownGender) {
+        setUnknown(0);
+      } else {
+        setUnknown(unknownGender);
+      }
+
+      setAggregatedData(finalGenderCount);
+    }
+  }, [data]);
+
+  // Draw the map and apply colors based on aggregatedData
+  useEffect(() => {
+    if (!aggregatedData) return;
+
+    const radius = Math.min(width, height) / 2 - 60;
+    const innerRadius = radius * 0.5;
+    const oldSvg = d3.select(svgRef.current);
+    oldSvg.selectAll("*").remove();
+
+    const svg = oldSvg
+      .append("g")
+      .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+    const color = d3.scaleOrdinal().range(d3.schemeDark2);
+
+    const pie = d3.pie().value((d) => d[1]);
+    const data_ready = pie(Object.entries(aggregatedData));
+
+    const arcGenerator = d3.arc().innerRadius(innerRadius).outerRadius(radius);
+
+    svg
+      .selectAll("mySlices")
+      .data(data_ready)
+      .join("path")
+      .attr("d", arcGenerator)
+      .attr("fill", (d) => color(d.data[0]))
+      .attr("stroke", "black")
+      .style("stroke-width", "2px")
+      .style("opacity", 0.7);
+
+    svg
+      .selectAll("mySlices")
+      .data(data_ready)
+      .join("polyline")
+      .attr("points", (d) => {
+        const posA = arcGenerator.centroid(d);
+        const posB = arcGenerator.centroid(d);
+        const posC = [...posB];
+        const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+        posB[0] = radius * 0.95 * (midAngle &lt; Math.PI ? 1 : -1);
+        posC[0] = radius * 1.3 * (midAngle &lt; Math.PI ? 1 : -1);
+        return [posA, posB, posC];
+      })
+      .style("fill", "none")
+      .attr("stroke", "black")
+      .style("stroke-width", "1px");
+
+    svg
+      .selectAll("mySlices")
+      .data(data_ready)
+      .join("text")
+      .text((d) => (d.data[1] > 0 ? `${d.data[0]} (${d.data[1]})` : null))
+      .attr("transform", (d) => {
+        const pos = arcGenerator.centroid(d);
+        const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+
+        // Adjust x and y positions
+        pos[0] = radius * 1.35 * (midAngle &lt; Math.PI ? 1 : -1);
+        pos[1] = pos[1] * 0.97; // Add an offset to the y-coordinate to align the text better
+
+        return `translate(${pos})`;
+      })
+      .style("text-anchor", (d) => {
+        const midAngle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+        return midAngle &lt; Math.PI ? "start" : "end";
+      })
+      .style("font-size", 15);
+  }, [aggregatedData, width, height]);
+
+  return (
+    &lt;>
+      &lt;div className="col-md-auto">
+        &lt;div className="comic-panel">
+          &lt;svg
+            viewBox="0 0 610 400"
+            width="610"
+            height="400"
+            overflow="visible"
+          >
+            &lt;image
+              href={CharacterImage}
+              width="100%"
+              height="350px"
+              x="-180"
+              y="100"
+            />
+            &lt;image
+              href={CatIamge2}
+              width="100%"
+              height="350px"
+              x="70"
+              y="170"
+            />
+            &lt;foreignObject x="155" y="15" width="380" height="300">
+              &lt;div
+                xmlns="http://www.w3.org/1999/xhtml"
+                style={{ width: "100%", height: "100%" }}
+              >
+                &lt;div className="bubble">{apiResponse.gender_ratio}&lt;/div>
+              &lt;/div>
+            &lt;/foreignObject>
+          &lt;/svg>
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="col-md-auto">
+        &lt;div className="comic-panel">
+          &lt;svg width={width} height={height}>
+            &lt;g ref={svgRef} width={width} height={height}>&lt;/g>
+            &lt;image href={CatImage} width="100%" height="185px" x="10" y="130" />
+          &lt;/svg>
+          &lt;div className="comic-text top-right">
+            Read books by gender of the author
+          &lt;/div>
+          {unknown ? (
+            &lt;div
+              className="comic-text bottom-left"
+              style={{ fontSize: "17px" }}
+            >
+              {unknown} {unknown > 1 ? "books" : "book"} could not be assigned
+              an author gender.
+            &lt;/div>
+          ) : (
+            &lt;>&lt;/>
+          )}
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
+  );
+};
+
+export default Gender;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

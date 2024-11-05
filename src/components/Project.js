@@ -10,7 +10,7 @@ const Project = (param) => `
   }).join("")}
             </div>
             <div><b>Timeframe:</b> ${param.timeframe}</div>
-            <a href="projects/${param.link}" class="btn btn-primary m-1">View the project</a>
+            <a href="${param.name === "master-project" ? "https://personal-datacomic.web.app/" : `projects/${param.link}`}" class="btn btn-primary m-1">View the project</a>
         </div>
     `;
 export default Project;

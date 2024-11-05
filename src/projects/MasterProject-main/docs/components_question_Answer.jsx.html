@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/question/Answer.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/question/Answer.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useState, useEffect } from "react";
+import CharacterImage from "../../assets/images/character_walking.png";
+import Question from "./Question";
+import Outro from "../outro/Outro";
+import { useData } from "../../DataProvider";
+import Loader from "../Loader";
+import { apiRequest } from "../../utils/apiRequest";
+
+/**
+ * Answer component receives a user's question and fetches a relevant response
+ * from an API based on their reading data and behavior. It can also manage
+ * user interactions, allowing them to ask another question or finish the process.
+ *
+ * - Displays the user's question and API response.
+ * - Allows users to ask another question or finish the interaction.
+ * - Maintains a chat history of previous questions and responses.
+ * - Uses a loading indicator while waiting for the API response.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.question - The user's question to be answered.
+ * @returns {JSX.Element} The rendered Answer component.
+ */
+const Answer = ({ question }) => {
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [outro, setOutro] = useState(false);
+  const { data } = useData();
+  const [apiResponse, setApiResponse] = useState(null);
+  const [chatHistory, setChatHistory] = useState([]); // New state to store history
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const message = `Please provide an answer to this reader question about their reading data and behavior: "${question}"\n
+        Please keep all the answer brief (1-2 sentences). Respond in plain text without any markup.
+        ${
+          chatHistory &amp;&amp;
+          `Don't forget the content from the previous chat history when you reply: ${chatHistory}`
+        }`;
+
+        const responseContent = await apiRequest(message, data);
+        //console.log(responseContent);
+
+        // Update the chat history with the latest question and answer
+        setChatHistory((prevHistory) => [
+          ...prevHistory,
+          { role: "user", content: question },
+          { role: "assistant", content: responseContent },
+        ]);
+        //const responseContent = "Question feature is disabled for now, sorry.";
+
+        setApiResponse(responseContent);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, [question]); // Trigger fetchData on new question
+
+  return (
+    &lt;>
+      &lt;div className="col-md-auto">
+        &lt;div className="comic-panel">
+          {!apiResponse ? (
+            &lt;Loader />
+          ) : (
+            &lt;>
+              &lt;svg
+                viewBox="0 0 400 400"
+                width="400"
+                height="400"
+                overflow="visible"
+              >
+                &lt;image
+                  href={CharacterImage}
+                  width="100%"
+                  height="300px"
+                  x="-140"
+                  y="125"
+                  transform="scale(-1 1) translate(-130 -4)"
+                />
+                &lt;foreignObject x="105" y="15" width="390" height="370">
+                  &lt;div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    &lt;div className="bubble">
+                      {apiResponse}
+                      &lt;br />
+                      {!showQuestion &amp;&amp; !outro &amp;&amp; (
+                        &lt;>
+                          &lt;button
+                            className="btn btn-primary m-1"
+                            onClick={() => {
+                              setShowQuestion(true);
+                              setTimeout(() => {
+                                const element = document.getElementById(
+                                  "question"
+                                );
+                                if (element) {
+                                  element.scrollIntoView({
+                                    behavior: "smooth",
+                                  });
+                                }
+                              }, 0);
+                            }}
+                          >
+                            Ask another question
+                          &lt;/button>
+                          &lt;button
+                            className="btn btn-primary m-1"
+                            onClick={() => {
+                              setOutro(true);
+                              setTimeout(() => {
+                                const element = document.getElementById(
+                                  "outro"
+                                );
+                                if (element) {
+                                  element.scrollIntoView({
+                                    behavior: "smooth",
+                                  });
+                                }
+                              }, 0);
+                            }}
+                          >
+                            Finish
+                          &lt;/button>
+                        &lt;/>
+                      )}
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/foreignObject>
+              &lt;/svg>
+            &lt;/>
+          )}
+        &lt;/div>
+      &lt;/div>
+      {showQuestion &amp;&amp; &lt;Question />}
+      {outro &amp;&amp; &lt;Outro />}
+    &lt;/>
+  );
+};
+
+export default Answer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
