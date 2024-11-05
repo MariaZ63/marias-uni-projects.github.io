@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/aggregate.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/aggregate.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Aggregates data by counting occurrences of a specific property value.
+ *
+ * @param {Array&lt;Object>} data - Array of data objects to aggregate.
+ * @param {string} property - The property name to count occurrences of.
+ * @returns {Object} An object mapping each unique property value to its count.
+ */
+export const aggregate = (data, property) => {
+  const propertyCount = {};
+
+  data.forEach((d) => {
+    const key = d[property];
+    if (key) {
+      if (propertyCount[key]) {
+        propertyCount[key]++;
+      } else {
+        propertyCount[key] = 1;
+      }
+    }
+  });
+
+  return propertyCount;
+};
+
+/**
+ * Aggregates data by counting entries per year based on "Date Read".
+ *
+ * @param {Array&lt;Object>} data - Array of book data objects to aggregate.
+ * @returns {Array&lt;Object>} Array of objects with `year` and `count` properties, for each year books were read.
+ */
+export const aggregateByYear = (data) => {
+  const yearCount = {};
+  data.forEach((d) => {
+    if (d["Date Read"]) {
+      const year = new Date(d["Date Read"]).getFullYear();
+      if (yearCount[year]) {
+        yearCount[year]++;
+      } else {
+        yearCount[year] = 1;
+      }
+    }
+  });
+
+  // Convert the yearCount object into an array for D3
+  const yearData = Object.keys(yearCount).map((year) => ({
+    year: parseInt(year), // Ensure years are integers
+    count: yearCount[year],
+  }));
+
+  return yearData;
+};
+
+/**
+ * Aggregates total pages read per month based on "Date Read" and "Number of Pages".
+ *
+ * @param {Array&lt;Object>} data - Array of book data objects to aggregate.
+ * @returns {Array&lt;Object>} Array of objects with `month` and `count` properties, indicating pages read per month.
+ */
+export const aggregateByMonth = (data) => {
+
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const monthCount = Array(12).fill(0);
+
+  data.forEach((d) => {
+    if (d["Date Read"]) {
+      const month = new Date(d["Date Read"]).getMonth();
+      monthCount[month]++;
+    }
+  });
+
+  const monthData = monthNames.map((month, index) => ({
+    month, 
+    count: monthCount[index], 
+  }));
+
+  return monthData;
+};
+
+/**
+ * Aggregates data by counting occurrences of specified countries.
+ *
+ * @param {Array&lt;Object>} data - Array of data objects to aggregate.
+ * @param {string} property - The property name to count country occurrences of.
+ * @returns {Object} An object mapping each country to its count, with "unknown" for entries with no country specified.
+ */
+export const aggregatePagesByYear = (data) => {
+  const yearCount = {};
+  data.forEach((d) => {
+    if (d["Date Read"]) {
+      const year = new Date(d["Date Read"]).getFullYear();
+      if (yearCount[year]) {
+        yearCount[year] += parseInt(d["Number of Pages"]) || 100;
+      } else {
+        yearCount[year] = parseInt(d["Number of Pages"])  || 100;
+      }
+    }
+  });
+
+  // Convert the yearCount object into an array for D3
+  const yearData = Object.keys(yearCount).map((year) => ({
+    year: parseInt(year), // Ensure years are integers
+    count: yearCount[year],
+  }));
+
+  return yearData;
+};
+
+/**
+ * Aggregates total pages read per month based on "Date Read" and "Number of Pages".
+ *
+ * @param {Array&lt;Object>} data - Array of book data objects to aggregate.
+ * @returns {Array&lt;Object>} Array of objects with `month` and `count` properties, indicating pages read per month.
+ */
+export const aggregatePagesByMonth = (data) => {
+  // Array of month names for easy lookup
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Initialize an array with count 0 for all months
+  const monthCount = Array(12).fill(0);
+
+  // Populate the monthCount array with page data
+  data.forEach((d) => {
+    if (d["Date Read"]) {
+      const month = new Date(d["Date Read"]).getMonth();
+      const pages = parseInt(d["Number of Pages"]) || 100; // Default to 100 if not provided
+      monthCount[month] += pages;
+    }
+  });
+
+  // Convert into the desired format with month names
+  const monthData = monthNames.map((month, index) => ({
+    month, // Use the month name
+    count: monthCount[index], // Get the count from the array
+  }));
+
+  return monthData;
+};
+
+/**
+ * Aggregates data by counting occurrences of specified countries.
+ *
+ * @param {Array&lt;Object>} data - Array of data objects to aggregate.
+ * @param {string} property - The property name to count country occurrences of.
+ * @returns {Object} An object mapping each country to its count, with "unknown" for entries with no country specified.
+ */
+export const aggregateCountries = (data, property) => {
+  const countryCount = {};
+
+  data.forEach((d) => {
+    // If the property is not present or empty, treat it as "unknown"
+    if (!d[property] || d[property].trim() === "") {
+      if (countryCount["unknown"]) {
+        countryCount["unknown"]++;
+      } else {
+        countryCount["unknown"] = 1;
+      }
+    } else {
+      // Otherwise, process the listed countries
+      const countries = d[property].split(",");
+      countries.forEach((country) => {
+        const trimmedCountry = country.trim();
+        if (trimmedCountry) {
+          if (countryCount[trimmedCountry]) {
+            countryCount[trimmedCountry]++;
+          } else {
+            countryCount[trimmedCountry] = 1;
+          }
+        }
+      });
+    }
+  });
+
+  return countryCount;
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

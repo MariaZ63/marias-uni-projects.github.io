@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/intro/FactualIntro.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/intro/FactualIntro.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useState } from "react";
+import CharacterImage from "../../assets/images/character_waving.png";
+import CharacterImageWithCat from "../../assets/images/character_cat_2.png";
+import CharacterImage2 from "../../assets/images/character_walking.png";
+
+/**
+ * FactualIntro component displays an introductory section of a data comic,
+ * inviting users to engage with their reading data.
+ *
+ * @param {Object} props - Component properties.
+ * @param {function} props.setContent - Function to toggle content visibility in the parent component.
+ *
+ * @returns {JSX.Element} The rendered component containing comic panels and character dialogues.
+ */
+const FactualIntro = ({ setContent }) => {
+  const [showButton, setShowButton] = useState(true);
+
+  return (
+    &lt;>
+      &lt;div className="row">
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+            &lt;svg
+              viewBox="0 0 350 300"
+              width="350"
+              height="300"
+              overflow="visible"
+            >
+              &lt;image
+                href={CharacterImage}
+                width="100%"
+                y="100"
+                x="-20"
+                height="230px"
+              >&lt;/image>
+            &lt;/svg>
+            &lt;div className="comic-text top-left me-2">
+              Welcome! This data comic offers you a personalized insight into
+              your reading data.
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+            &lt;svg
+              viewBox="0 0 490 300"
+              width="490"
+              height="300"
+              overflow="visible"
+            >
+              &lt;image
+                href={CharacterImageWithCat}
+                width="100%"
+                height="300px"
+                x="-10"
+                y="75"
+              />
+              &lt;foreignObject x="20" y="45" width="200" height="150">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;div className="simpleBubble">
+                    &lt;b>Archie&lt;/b> is always up to mischief. But sometimes, he
+                    has useful tips.
+                  &lt;/div>
+                &lt;/div>
+              &lt;/foreignObject>
+              &lt;foreignObject x="320" y="145" width="200" height="150">
+                &lt;div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  &lt;div className="simpleBubble">
+                    &lt;b>Rose&lt;/b> studied your data closely and will explain the
+                    insights to you.
+                  &lt;/div>
+                &lt;/div>
+              &lt;/foreignObject>
+            &lt;/svg>
+            &lt;div className="comic-text top-left me-2">
+              The two comic characters will lead you through the story.
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+        &lt;div className="col-md-auto">
+          &lt;div className="comic-panel">
+            &lt;svg
+              viewBox="0 0 300 300"
+              width="300"
+              height="300"
+              overflow="visible"
+            >
+              &lt;image
+                  href={CharacterImage2}
+                  width="100%"
+                  height="300px"
+                  x="-110"
+                  y="28"
+                  transform="scale(-1 1) translate(-130 -4)"
+                />
+              &lt;foreignObject x="115" y="55" width="220" height="200">
+                &lt;div className="bubble">
+                  Are you ready to start?
+                &lt;/div>
+                {showButton &amp;&amp; (
+                  &lt;button
+                    className="btn btn-primary m-1"
+                    onClick={() => {
+                      setContent(true);
+                      setShowButton(false);
+                    }}
+                  >
+                    Start
+                  &lt;/button>
+                )}
+              &lt;/foreignObject>
+            &lt;/svg>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
+  );
+};
+
+export default FactualIntro;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

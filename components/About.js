@@ -9,12 +9,16 @@ const About = () => `
           <li>HTML</li>
           <li>CSS</li>
           <li>Bootstrap</li>
-          <li>JavaScript</li>
+          <li>JavaScript (ES6+)</li>
           <li>d3.js</li>
           <li>jQuery</li>
+          <li>React</li>
+          <li>Node.js</li>
+          <li>Babel, Eslint, Webpack</li>
         </ul>
         <h4>Programming Languages</h4>
         <ul>
+          <li>JavaScript</li>
           <li>Java</li>
           <li>C</li>
         </ul>
@@ -22,6 +26,7 @@ const About = () => `
         <ul>
           <li>usage of git</li>
           <li>Unix Shell</li>
+          <li>RDF/SPARQL</li>
         </ul>
       </div>
       <div class="col-md-6 col-sm-12 text-left">

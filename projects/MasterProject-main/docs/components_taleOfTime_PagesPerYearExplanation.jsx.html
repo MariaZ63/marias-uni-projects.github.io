@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/taleOfTime/PagesPerYearExplanation.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/taleOfTime/PagesPerYearExplanation.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import CharacterImage from "../../assets/images/character_standing.png";
+
+/**
+ * PagesPerYearExplanation component displays a visual explanation of the 
+ * total number of pages read and the estimated time spent reading based 
+ * on the provided page data. It calculates the total pages and time spent 
+ * using average reading metrics, presenting the information in a visually 
+ * appealing format with an accompanying character image.
+ *
+ * @param {Object} pageData - The data containing page count information.
+ * @returns {JSX.Element} The rendered PagesPerYearExplanation component.
+ */
+const PagesPerYearExplanation = ({ pageData }) => {
+  const getTotalNumberOfPages = (data) => {
+    let result = 0;
+    data.forEach((d) => {
+      result += d.count;
+    });
+    return result;
+  };
+  const totalNumberOfPages = getTotalNumberOfPages(pageData);
+
+  const getTotalTimeSpent = (pages) => {
+    const minutes = pages * 3.2;
+    const hours = Math.round(minutes / 60);
+    return hours;
+  };
+
+  const totalTimeSpent = getTotalTimeSpent(totalNumberOfPages);
+
+  return (
+    &lt;>
+      &lt;div className="col-md-auto">
+        &lt;div className="comic-panel">
+          &lt;svg
+            viewBox="0 0 310 400"
+            width="310"
+            height="400"
+            overflow="visible"
+          >
+            &lt;image
+              href={CharacterImage}
+              width="100%"
+              height="305px"
+              x="-130"
+              y="150"
+            />
+            &lt;foreignObject x="70" y="5" width="290" height="350">
+              &lt;div
+                xmlns="http://www.w3.org/1999/xhtml"
+                style={{ width: "100%", height: "100%" }}
+              >
+                &lt;div className="bubble">
+                  In total, you read &lt;b>{totalNumberOfPages}&lt;/b> pages. The
+                  average reader can read 250 words per minute and the average
+                  book has approximately 800 words per page. Therefore, it would
+                  take 3 minutes and 12 seconds to read one page.* &lt;br />
+                  This means that you spent roughly &lt;b>{totalTimeSpent}&lt;/b>{" "}
+                  hours reading!
+                &lt;/div>
+              &lt;/div>
+            &lt;/foreignObject>
+          &lt;/svg>
+          &lt;div className="comic-text bottom-right" style={{ fontSize: "17px" }}>
+            *click&amp;nbsp;
+            &lt;a
+              href="https://catalog.shepherd.edu/mime/media/12/913/SU+Credit+Hour+Policy+Appendix+B.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here
+            &lt;/a>
+            &amp;nbsp;to see the source
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/>
+  );
+};
+
+export default PagesPerYearExplanation;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/BookDetail.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/BookDetail.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useState } from "react";
+import BookImage from "../assets/images/book.png"; // Default fallback image
+import CatImage from "../assets/images/cat_sitting.png";
+import Loader from "./Loader";
+
+/**
+ * BookDetail component displays detailed information about a specific book.
+ * It shows the book's cover image, title, authors, genre, page count,
+ * language, origin country, publication year, and ratings. 
+ * It also provides a link to the book's Goodreads page if available.
+ * A loading indicator is shown while the cover image is being fetched.
+ *
+ * @param {Object} props - The properties object.
+ * @param {Object} props.book - The book object containing details about the book.
+ * @param {Function} props.setDetail - Function to set the detail state (for closing the detail view).
+ * @returns {JSX.Element} The rendered BookDetail component with book information or a loading indicator.
+ */
+const BookDetail = ({ book, setDetail }) => {
+  const [coverImage, setCoverImage] = useState(null); // Store the cover image URL
+  const [loading, setLoading] = useState(true); // Track the loading state
+
+  // Use ISBN to construct cover image URL
+  const coverLink = `https://covers.openlibrary.org/b/isbn/${book.ISBN}-M.jpg?default=false`;
+
+  useEffect(() => {
+    // Start loading process
+    setLoading(true);
+
+    // Create an image element to check if the image URL is valid
+    const img = new Image();
+    img.src = coverLink;
+
+    // Set up event listeners to handle image load and error
+    img.onload = () => {
+      setCoverImage(coverLink); // Image found
+      setLoading(false); // Set loading to false when the image is loaded
+    };
+    img.onerror = () => {
+      setCoverImage(BookImage); // Image not found, use fallback
+      setLoading(false); // Set loading to false even if the fallback is used
+    };
+  }, [coverLink]);
+
+  const ref = `https://www.goodreads.com/book/show/${book["Goodreads Id"]}`;
+
+  return (
+    &lt;div className="col-md-auto">
+      &lt;div className="comic-panel">
+        &lt;svg viewBox="0 0 400 400" width="400" height="400" overflow="visible">
+          {loading ? (
+            &lt;foreignObject x="0" y="0" width="400" height="400">
+              &lt;Loader />
+            &lt;/foreignObject>
+          ) : (
+            &lt;>
+              &lt;image
+                href={coverImage}
+                width="100%"
+                height="150px"
+                x="-140"
+                y="50"
+              />
+
+              &lt;image
+                href={CatImage}
+                width="100%"
+                height="100px"
+                x="-80"
+                y="300"
+              />
+              {book["Goodreads Id"] ? (
+                &lt;foreignObject x="-20" y="230" width="125" height="200">
+                  &lt;div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      fontSize: "17px",
+                    }}
+                  >
+                    &lt;div className="bubble-right">
+                      You can visit the&amp;nbsp;
+                      &lt;a href={ref} target="_blank" rel="noopener noreferrer">
+                        Goodreads page
+                      &lt;/a>{" "}
+                      of this book!
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/foreignObject>
+              ) : (
+                &lt;foreignObject x="-20" y="290" width="125" height="60">
+                  &lt;div
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      fontSize: "17px",
+                    }}
+                  >
+                    &lt;div className="bubble-right">
+                      Meow!
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/foreignObject>
+              )}
+
+              &lt;foreignObject x="130" y="15" width="250" height="375">
+                &lt;h3>{book.Title}&lt;/h3>
+                &lt;ul>
+                  &lt;li>
+                    &lt;b>Author(s)&lt;/b>: {book.Authors}
+                  &lt;/li>
+                  &lt;li>
+                    &lt;b>Genre:&lt;/b> {book.Genre}
+                  &lt;/li>
+                  &lt;li>
+                    &lt;b>Number of Pages:&lt;/b>{" "}
+                    {book["Number of Pages"] || "unknown"}
+                  &lt;/li>
+                  &lt;li>
+                    &lt;b>Language:&lt;/b> {book.Language}
+                  &lt;/li>
+                  &lt;li>
+                    &lt;b>Origin Country:&lt;/b> {book.Country || "unknown"}
+                  &lt;/li>
+                  &lt;li>
+                    &lt;b>Original Publication Year:&lt;/b>{" "}
+                    {book["Original Publication Year"] ||
+                      book["Year Published"] ||
+                      "unknown"}
+                  &lt;/li>
+                  {book["Read Status"] === "read" &amp;&amp; (
+                    &lt;>
+                      &lt;li>
+                        &lt;b>Read on:&lt;/b> {book["Date Read"] || "no read date"}
+                      &lt;/li>
+                      &lt;li>
+                        &lt;b>Your Rating:&lt;/b>{" "}
+                        {book["Star Rating"]
+                          ? book["Star Rating"] > 1
+                            ? `${book["Star Rating"]} stars`
+                            : `${book["Star Rating"]} star`
+                          : "not rated"}
+                      &lt;/li>
+                    &lt;/>
+                  )}
+                  &lt;li>
+                    &lt;b>Average Rating:&lt;/b> {book["Average Rating"] || "unknown"}{" "}
+                    stars
+                  &lt;/li>
+                &lt;/ul>
+              &lt;/foreignObject>
+            &lt;/>
+          )}
+        &lt;/svg>
+        &lt;div className="position-absolute top-0 end-0 mb-1 me-1">
+          &lt;svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-x-circle"
+            viewBox="0 0 16 16"
+            onClick={() => setDetail(null)} // Set to null to close the detail view
+          >
+            &lt;path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+            &lt;path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+          &lt;/svg>
+        &lt;/div>
+        &lt;div className="comic-text top-left">Book Details&lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default BookDetail;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Answer">Answer</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BackToTheFuture">BackToTheFuture</a></li><li><a href="global.html#BookDetail">BookDetail</a></li><li><a href="global.html#BookRecommendation">BookRecommendation</a></li><li><a href="global.html#BookStack">BookStack</a></li><li><a href="global.html#BooksPerYear">BooksPerYear</a></li><li><a href="global.html#ChooseTimeView">ChooseTimeView</a></li><li><a href="global.html#Content">Content</a></li><li><a href="global.html#DataContext">DataContext</a></li><li><a href="global.html#DataProvider">DataProvider</a></li><li><a href="global.html#FactualIntro">FactualIntro</a></li><li><a href="global.html#FactualOutro">FactualOutro</a></li><li><a href="global.html#FictionalIntro">FictionalIntro</a></li><li><a href="global.html#FictionalOutro">FictionalOutro</a></li><li><a href="global.html#Gender">Gender</a></li><li><a href="global.html#Genres">Genres</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Intro">Intro</a></li><li><a href="global.html#Languages">Languages</a></li><li><a href="global.html#Loader">Loader</a></li><li><a href="global.html#MainPart">MainPart</a></li><li><a href="global.html#Navigation">Navigation</a></li><li><a href="global.html#Outro">Outro</a></li><li><a href="global.html#PagesPerYear">PagesPerYear</a></li><li><a href="global.html#PagesPerYearExplanation">PagesPerYearExplanation</a></li><li><a href="global.html#PublicationYears">PublicationYears</a></li><li><a href="global.html#PublishingPatterns">PublishingPatterns</a></li><li><a href="global.html#Question">Question</a></li><li><a href="global.html#QuestionFeature">QuestionFeature</a></li><li><a href="global.html#ReadAroundTheWorld">ReadAroundTheWorld</a></li><li><a href="global.html#TBR">TBR</a></li><li><a href="global.html#TBR_Recommendation">TBR_Recommendation</a></li><li><a href="global.html#TaleOfTime">TaleOfTime</a></li><li><a href="global.html#Tooltip">Tooltip</a></li><li><a href="global.html#Welcome">Welcome</a></li><li><a href="global.html#WorldMap">WorldMap</a></li><li><a href="global.html#WorldMapExplanation">WorldMapExplanation</a></li><li><a href="global.html#YearDetail">YearDetail</a></li><li><a href="global.html#aggregate">aggregate</a></li><li><a href="global.html#aggregateByMonth">aggregateByMonth</a></li><li><a href="global.html#aggregateByYear">aggregateByYear</a></li><li><a href="global.html#aggregateCountries">aggregateCountries</a></li><li><a href="global.html#aggregatePagesByMonth">aggregatePagesByMonth</a></li><li><a href="global.html#aggregatePagesByYear">aggregatePagesByYear</a></li><li><a href="global.html#apiRequest">apiRequest</a></li><li><a href="global.html#fetchData">fetchData</a></li><li><a href="global.html#filter">filter</a></li><li><a href="global.html#filterByCountry">filterByCountry</a></li><li><a href="global.html#filterByYear">filterByYear</a></li><li><a href="global.html#getReadingSpeed">getReadingSpeed</a></li><li><a href="global.html#handleDatasetChange">handleDatasetChange</a></li><li><a href="global.html#transformToText">transformToText</a></li><li><a href="global.html#useData">useData</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Nov 03 2024 10:00:24 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
