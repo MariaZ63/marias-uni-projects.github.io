@@ -13,6 +13,8 @@ In my master thesis, I focused on developing different methods for personalized 
  
 **Timeframe:** Summer semester 2024
 
+**Details:** [./src/projects/MasterProject-main](https://github.com/MariaZ63/marias-uni-projects.github.io/tree/main/src/projects/MasterProject-main)
+
 ## React Book Management Applicaton
 ![Image](./src/assets/iBooks.png)
 
@@ -21,6 +23,8 @@ This project focused on getting to know the essentials of modern web development
 **Skills:** Modern JavaScript · git · Webpack · Babel · ESLint · Node.js · TDD · vitest · React 
 
 **Timeframe:** Winter semester 2023/24
+
+**Details:** [./src/projects/iBooks](https://github.com/MariaZ63/marias-uni-projects.github.io/tree/main/src/projects/iBooks)
 
 ## Svelte Logbook
 <img src="./src/assets/LogBook.png" alt="alt text" width="30%">
@@ -31,6 +35,8 @@ The final assigment for the fictional GOTO-Mars project. This logbook applicatio
 
 **Timeframe:** Summer semester 2023
 
+**Details:** [./src/projects/LogBook](https://github.com/MariaZ63/marias-uni-projects.github.io/tree/main/src/projects/LogBook)
+
 ## Single Page Application
 <img src="./src/assets/SPA.png" alt="alt text" width="50%">
 
@@ -39,6 +45,8 @@ As an assignment for a class on web technologies, three fellow students and I we
 **Skills:** git · d3.js · Express.js · JavaScript · Bootstrap 
 
 **Timeframe:** Summer semester 2023
+
+**Details:** [./src/projects/SPA](https://github.com/MariaZ63/marias-uni-projects.github.io/tree/main/src/projects/SPA)
 
 ## d3 Graph Visualization
 <img src="./src/assets/graph.png" alt="alt text" width="50%">
@@ -49,6 +57,8 @@ This was a graded assignment for my information visualization class. The base wa
 
 **Timeframe:** Summer semester 2023
 
+**Details:** [./src/projects/D3_Graph_Visualization](https://github.com/MariaZ63/marias-uni-projects.github.io/tree/main/src/projects/D3_Graph_Visualization)
+
 ## d3 Scatterplot
 <img src="./src/assets/scatterplot.png" alt="alt text" width="70%">
 
@@ -58,6 +68,8 @@ As a graded assignment for a information visualization class, I received a datas
 
 **Timeframe:** Summer semester 2023
 
+**Details:** [./src/projects/D3_Scatterplot](https://github.com/MariaZ63/marias-uni-projects.github.io/tree/main/src/projects/D3_Scatterplot)
+
 ## Data Comic
 ![Image](./src/assets/datacomic.png)
 
@@ -66,3 +78,5 @@ During an information visualization project, I created this comic with two fello
 **Skills:** git · Data storytelling · jQuery · CSS 
 
 **Timeframe:** Winter semester 2022/23
+
+**Details:** [./src/projects/Data_Comic](https://github.com/MariaZ63/marias-uni-projects.github.io/tree/main/src/projects/Data_Comic)
