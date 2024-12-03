@@ -1,6 +1,7 @@
 # Maria Zieglmeier's Portfolio
 
 Welcome! This repository contains a number of web development projects and assignments I implemented during my master's program at *University of Bamberg*. 
+To see the results, visit [https://mariaz63.github.io/marias-uni-projects.github.io/]().
 
 For technical details, please go to `./src/projects/[projectname]`. 
 
